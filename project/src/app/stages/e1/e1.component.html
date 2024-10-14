@@ -1,1 +1,5 @@
-<p>e1 works!</p>
+<app-image-upload (imageChange)="nextImage($event)" />
+<div class="row">
+  <app-image-display [image$]="srcImage$" />
+  <app-image-display [image$]="lsbImage$" />
+</div>
