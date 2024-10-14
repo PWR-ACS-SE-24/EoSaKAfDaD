@@ -21,16 +21,34 @@ export class AppImage {
     });
   }
 
+  public get bytes(): number[] {
+    return Array.from(this.imageData.data).filter(
+      (_, index) => index % 4 !== 3
+    );
+  }
+
+  public get dataUrl(): string {
+    const canvas = document.createElement("canvas");
+    canvas.width = this.imageData.width;
+    canvas.height = this.imageData.height;
+    canvas.getContext("2d")?.putImageData(this.imageData, 0, 0);
+    return canvas.toDataURL("image/png"); // TODO: Support other formats
+  }
+
   public drawOn(canvas: HTMLCanvasElement): void {
     canvas.width = this.imageData.width;
     canvas.height = this.imageData.height;
     canvas.getContext("2d")?.putImageData(this.imageData, 0, 0);
   }
 
-  public mapBytes(callback: (byte: number) => number): AppImage {
+  public mapBytes(callback: (byte: number, index: number) => number): AppImage {
     const data = new Uint8ClampedArray(this.imageData.data);
-    for (let i = 0; i < data.length; i++) {
-      data[i] = callback(this.imageData.data[i]);
+    let index = 0;
+    for (let i = 0; i < data.length; i += 4) {
+      for (let j = 0; j < 3; j++) {
+        data[i + j] = callback(this.imageData.data[i + j], index);
+        index++;
+      }
     }
     return new AppImage(
       new ImageData(data, this.imageData.width, this.imageData.height)
