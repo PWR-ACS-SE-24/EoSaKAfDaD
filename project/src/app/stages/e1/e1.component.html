@@ -1,0 +1,16 @@
+<h1>Etap 1: Metoda najmniej znaczącego bitu na tekście</h1>
+<div class="row">
+  <app-image-upload (imageChange)="onNextImage($event)" />
+  <app-image-download [image$]="newImage$" />
+</div>
+<div class="row">
+  <app-image-display [image$]="newImage$" />
+  <app-image-display [image$]="lsbImage$" />
+</div>
+<textarea
+  rows="5"
+  [value]="textContent"
+  [disabled]="textBound === 0"
+  (input)="onTextChange($event)"
+></textarea>
+{{ textContent.length }}/{{ textBound }}

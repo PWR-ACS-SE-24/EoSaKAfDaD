@@ -1,0 +1,16 @@
+:root {
+  --app-navy: #001f3f;
+  --app-blue: #0074d9;
+  --app-black: #111111;
+  --app-silver: #dddddd;
+  --app-white: #ffffff;
+
+  font-family: sans-serif;
+  background: var(--app-white);
+  color: var(--app-black);
+}
+
+h1 {
+  font-size: 1.5rem;
+  font-weight: bold;
+}

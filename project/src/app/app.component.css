@@ -1,0 +1,37 @@
+:host {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr;
+}
+
+@media (min-width: 768px) {
+  :host {
+    grid-template-columns: auto 1fr;
+    grid-template-rows: 1fr;
+  }
+}
+
+nav,
+main {
+  overflow-y: auto;
+}
+
+nav {
+  background: var(--app-navy);
+  color: var(--app-white);
+}
+
+nav a {
+  display: block;
+  padding: 1rem;
+  transition-duration: 0.25s;
+}
+
+nav a:where(.active, :hover) {
+  background: var(--app-blue);
+}
+
+main {
+  padding: 1rem;
+}

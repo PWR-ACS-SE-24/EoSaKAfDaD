@@ -1,0 +1,8 @@
+/* TODO: Add nicer styling */
+
+a {
+  padding: 0.25rem;
+  background: var(--app-silver);
+  border: 1px solid var(--app-black);
+  border-radius: 0.25rem;
+}

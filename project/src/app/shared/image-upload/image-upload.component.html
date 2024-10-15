@@ -1,0 +1,8 @@
+<div>
+  <!-- TODO: Add a drag&drop file upload -->
+  <input
+    type="file"
+    [accept]="supportedMimeTypes.join(',')"
+    (change)="onFileChange($event)"
+  />
+</div>
