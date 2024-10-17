@@ -18,7 +18,7 @@ Metody ukrywania treści w obrazach
     - Można tu stosować techniki takie jak dodawanie lub odejmowanie wartości koloru o określonej wielkości w celu zakodowania informacji.
 
 4. Maskowanie i filtrowanie:
-    - Jest to bardziej zaawansowana technika, która wykorzystuje maski bitowe i filtrowanie, aby zakodować informację w obrazie. Stosowana jest głównie w obrazach w odcieniach szarości.
+    - Jest to bardziej zaawansowana technika, która wykorzystuje maski bitowe i filtrowanie, aby zakodować informację w obrazie. Stosowana jest głównie w obrazach w odcieniach szarości. Pochodna tej techniki jest używana przy kryptografi wizualnej, gdzie obraz wyjściowy jest osiągalny tylko i wyłącznie z obrazem "kluczem".
     - Polega na ukrywaniu danych w intensywnościach pikseli za pomocą maski bitowej, co jest szczególnie użyteczne w obrazach medycznych lub innych obrazach o wysokiej jakości, gdzie subtelne zmiany mogą być mniej zauważalne.
 
 5. Metoda rozpraszania (Spread Spectrum):
@@ -31,5 +31,5 @@ Metody ukrywania treści w obrazach
 
 Źródła:
 - R. Chandramouli, N. Memon "Analysis of LSB Based Image Steganography Techniques"
-- C.P.Sumathi, T.Santanam, G.Umamaheswari "A Study of Various Steganographic Techniques Used for Information Hiding"
+- C.P. Sumathi, T. Santanam, G. Umamaheswari "A Study of Various Steganographic Techniques Used for Information Hiding"
 - S. Katzenbeisser, F. Petitcolas "Information Hiding Techniques for Steganography and Digital Watermaking"
