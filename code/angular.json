@@ -79,31 +79,10 @@
       "projectType": "library",
       "root": "projects/steg",
       "sourceRoot": "projects/steg/src",
-      "prefix": "lib",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
-          "options": {
-            "project": "projects/steg/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "projects/steg/tsconfig.lib.prod.json"
-            },
-            "development": {
-              "tsConfig": "projects/steg/tsconfig.lib.json"
-            }
-          },
-          "defaultConfiguration": "production"
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "tsConfig": "projects/steg/tsconfig.spec.json",
-            "polyfills": ["zone.js", "zone.js/testing"]
-          }
-        }
-      }
+      "prefix": "lib"
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }
