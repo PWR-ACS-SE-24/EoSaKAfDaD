@@ -1,10 +1,11 @@
 {
-  "name": "project",
+  "name": "code",
   "version": "0.0.0",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build --base-href /EoSaKAfDaD/"
+    "build:steg": "cd projects/steg/src/lib && npx wasm-pack build --target web",
+    "build:app": "ng build app --base-href /EoSaKAfDaD/",
+    "build": "npm run build:steg && npm run build:app",
+    "start": "npm run build:steg && ng serve"
   },
   "private": true,
   "dependencies": {
@@ -19,20 +20,22 @@
     "lodash": "^4.17.21",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
+    "wasm-pack": "^0.13.0",
     "zone.js": "~0.14.10"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^18.2.8",
+    "@angular-devkit/build-angular": "^18.2.9",
     "@angular/cli": "^18.2.8",
     "@angular/compiler-cli": "^18.2.0",
     "@types/jasmine": "~5.1.0",
-    "@types/lodash": "^4.17.10",
+    "@types/lodash": "^4.17.11",
     "jasmine-core": "~5.2.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "ng-packagr": "^18.2.0",
     "typescript": "~5.5.2"
   }
 }
