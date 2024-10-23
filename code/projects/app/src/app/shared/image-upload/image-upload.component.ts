@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from "@angular/core";
-import { AppImage } from "../../core/app-image";
+import { AppImage } from "steg";
+import { fromFile } from "../../util/app-image";
 
 @Component({
   selector: "app-image-upload",
@@ -24,6 +25,6 @@ export class ImageUploadComponent {
     const file = input.files?.[0];
     if (!file || !this.supportedMimeTypes.includes(file.type)) return;
 
-    AppImage.fromFile(file).then((image) => this.imageChange.emit(image));
+    fromFile(file).then((image) => this.imageChange.emit(image));
   }
 }

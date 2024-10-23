@@ -9,8 +9,7 @@ import {
 import { ImageUploadComponent } from "../../shared/image-upload/image-upload.component";
 import { ImageDisplayComponent } from "../../shared/image-display/image-display.component";
 import { ImageDownloadComponent } from "../../shared/image-download/image-download.component";
-import { AppImage } from "../../core/app-image";
-import { embedText, extractText, highlightLsb } from "../../core/lsb";
+import { AppImage, highlightLsb, embedText, extractText } from "steg";
 
 @Component({
   selector: "app-e1",
@@ -30,7 +29,7 @@ export class E1Component {
   private readonly imageSubject = new Subject<AppImage>();
   protected readonly newImage$ = combineLatest([
     this.imageSubject,
-    this.textSubject.pipe(debounceTime(250), distinctUntilChanged()),
+    this.textSubject.pipe(debounceTime(100), distinctUntilChanged()),
   ]).pipe(map(([image, text]) => embedText(image, text)));
   protected readonly lsbImage$ = this.newImage$.pipe(map(highlightLsb));
 
@@ -39,7 +38,9 @@ export class E1Component {
 
     this.textContent = extractText(image);
     this.textSubject.next(this.textContent);
-    this.textBound = Math.floor(image.bytes.length / 7);
+    this.textBound = Math.floor(
+      (image.imageData.width * image.imageData.height * 3) / 7
+    );
   }
 
   protected onTextChange(event: Event): void {

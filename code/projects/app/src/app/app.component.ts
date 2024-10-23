@@ -1,6 +1,5 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 import { RouterModule, RouterOutlet } from "@angular/router";
-import { helloWorld } from "steg";
 
 @Component({
   selector: "app-root",
@@ -9,8 +8,4 @@ import { helloWorld } from "steg";
   templateUrl: "./app.component.html",
   styleUrl: "./app.component.css",
 })
-export class AppComponent implements OnInit {
-  public ngOnInit(): void {
-    console.log(helloWorld());
-  }
-}
+export class AppComponent {}
