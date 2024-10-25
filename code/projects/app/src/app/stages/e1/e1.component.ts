@@ -11,8 +11,8 @@ import { ImageDisplayComponent } from "../../shared/image-display/image-display.
 import { ImageDownloadComponent } from "../../shared/image-download/image-download.component";
 import { lsbHighlight, lsb1embedText, lsb1extractText } from "steg";
 
-const RGB_CHANNEL_COUNT = 3;
 const ASCII_CHAR_BITS = 7;
+const RGB_CHANNELS = 3;
 
 @Component({
   selector: "app-e1",
@@ -42,7 +42,7 @@ export class E1Component {
     this.textContent = lsb1extractText(image);
     this.textSubject.next(this.textContent);
     this.textBound = Math.floor(
-      (image.width * image.height * RGB_CHANNEL_COUNT) / ASCII_CHAR_BITS
+      (image.width * image.height * RGB_CHANNELS) / ASCII_CHAR_BITS
     );
   }
 
