@@ -9,7 +9,7 @@ import {
 import { ImageUploadComponent } from "../../shared/image-upload/image-upload.component";
 import { ImageDisplayComponent } from "../../shared/image-display/image-display.component";
 import { ImageDownloadComponent } from "../../shared/image-download/image-download.component";
-import { AppImage, lsbHighlight, lsb1embedText, lsb1extractText } from "steg";
+import { lsbHighlight, lsb1embedText, lsb1extractText } from "steg";
 
 const RGB_CHANNEL_COUNT = 3;
 const ASCII_CHAR_BITS = 7;
@@ -29,21 +29,20 @@ export class E1Component {
   protected textContent = "";
   protected textBound = 0;
   private readonly textSubject = new Subject<string>();
-  private readonly imageSubject = new Subject<AppImage>();
+  private readonly imageSubject = new Subject<ImageData>();
   protected readonly newImage$ = combineLatest([
     this.imageSubject,
     this.textSubject.pipe(debounceTime(100), distinctUntilChanged()),
   ]).pipe(map(([image, text]) => lsb1embedText(image, text)));
   protected readonly lsbImage$ = this.newImage$.pipe(map(lsbHighlight));
 
-  protected onNextImage(image: AppImage): void {
+  protected onNextImage(image: ImageData): void {
     this.imageSubject.next(image);
 
     this.textContent = lsb1extractText(image);
     this.textSubject.next(this.textContent);
     this.textBound = Math.floor(
-      (image.imageData.width * image.imageData.height * RGB_CHANNEL_COUNT) /
-        ASCII_CHAR_BITS
+      (image.width * image.height * RGB_CHANNEL_COUNT) / ASCII_CHAR_BITS
     );
   }
 

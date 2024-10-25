@@ -1,2 +1,2 @@
-mod app_image;
+mod image_data;
 mod lsb1;
