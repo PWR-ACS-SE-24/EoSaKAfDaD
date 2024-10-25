@@ -23,15 +23,15 @@ impl AppImage {
 impl AppImage {
     pub fn map_bytes<F: Fn(u8, usize) -> u8>(&self, callback: F) -> AppImage {
         let old_data = self.image_data.data();
-        let mut index = 0;
         let mut new_data = Vec::with_capacity(old_data.len());
-        for i in (0..old_data.len()).step_by(4) {
-            for j in 0..3 {
-                new_data.push(callback(old_data[i + j], index));
-                index += 1;
+
+        for (i, bytes) in old_data.chunks(4).enumerate() {
+            for (j, byte) in bytes[..3].iter().enumerate() {
+                new_data.push(callback(*byte, i * 3 + j));
             }
             new_data.push(255);
         }
+
         AppImage::new(
             ImageData::new_with_u8_clamped_array(Clamped(&new_data), self.image_data.width())
                 .expect("ImageData constructor should succeed"),
