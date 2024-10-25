@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { Observable } from "rxjs";
-import { AppImage } from "../../core/app-image";
+import { AppImage } from "steg";
+import { dataUrl } from "../../util/app-image";
 
 @Component({
   selector: "app-image-download",
@@ -15,6 +16,6 @@ export class ImageDownloadComponent implements OnInit {
   protected path = "";
 
   public ngOnInit(): void {
-    this.image$.subscribe((image) => (this.path = image.dataUrl));
+    this.image$.subscribe((image) => (this.path = dataUrl(image)));
   }
 }

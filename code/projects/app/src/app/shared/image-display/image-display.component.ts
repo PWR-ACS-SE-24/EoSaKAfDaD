@@ -1,6 +1,7 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from "@angular/core";
 import { Observable } from "rxjs";
-import { AppImage } from "../../core/app-image";
+import { AppImage } from "steg";
+import { drawOn } from "../../util/app-image";
 
 @Component({
   selector: "app-image-display",
@@ -16,6 +17,6 @@ export class ImageDisplayComponent implements OnInit {
   protected readonly canvas!: ElementRef<HTMLCanvasElement>;
 
   public ngOnInit(): void {
-    this.image$.subscribe((image) => image.drawOn(this.canvas.nativeElement));
+    this.image$.subscribe((image) => drawOn(image, this.canvas.nativeElement));
   }
 }
