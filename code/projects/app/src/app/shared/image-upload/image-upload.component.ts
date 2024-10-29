@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Output } from "@angular/core";
-import { AppImage } from "steg";
-import { fromFile } from "../../util/app-image";
+import { fromFile } from "../../util/image-data";
 
 @Component({
   selector: "app-image-upload",
@@ -10,7 +9,7 @@ import { fromFile } from "../../util/app-image";
   styleUrl: "./image-upload.component.css",
 })
 export class ImageUploadComponent {
-  @Output() public readonly imageChange = new EventEmitter<AppImage>();
+  @Output() public readonly imageChange = new EventEmitter<ImageData>();
 
   protected readonly supportedMimeTypes = [
     "image/jpeg",

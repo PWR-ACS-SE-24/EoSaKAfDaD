@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { Observable } from "rxjs";
-import { AppImage } from "steg";
-import { dataUrl } from "../../util/app-image";
+import { dataUrl } from "../../util/image-data";
 
 @Component({
   selector: "app-image-download",
@@ -11,7 +10,7 @@ import { dataUrl } from "../../util/app-image";
   styleUrl: "./image-download.component.css",
 })
 export class ImageDownloadComponent implements OnInit {
-  @Input({ required: true }) public image$!: Observable<AppImage>;
+  @Input({ required: true }) public image$!: Observable<ImageData>;
 
   protected path = "";
 
