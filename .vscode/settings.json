@@ -1,3 +1,4 @@
 {
-  "rust-analyzer.linkedProjects": ["code/projects/steg/src/lib/Cargo.toml"]
+  "rust-analyzer.linkedProjects": ["code/projects/steg/src/lib/Cargo.toml"],
+  "markdown-pdf.displayHeaderFooter": false
 }
