@@ -1,35 +1,33 @@
-Steganografia obrazów jest jedną z technik steganografii, która polega na ukrywaniu informacji w obrazach w sposób niewidoczny dla ludzkiego oka. Celem tej metody jest przekazanie tajnej wiadomości w sposób dyskretny, bez wzbudzania podejrzeń, że w ogóle ma miejsce komunikacja. W przeciwieństwie do kryptografii, która skupia się na zabezpieczaniu treści wiadomości, steganografia koncentruje się na ukryciu samego faktu jej istnienia.
+<h1 align="center">Inżynieria pozyskiwania i ochrony <br/> wiedzy z danych i baz danych</h1>
 
-Metody ukrywania treści w obrazach
-1. Metoda najmniej znaczącego bitu (Least Significant Bit, LSB):
-    - Najpopularniejsza i najprostsza metoda steganografii obrazów.
-    - Polega na modyfikacji najmniej znaczącego bitu wartości koloru pikseli.
-    - Na przykład, dla 8-bitowego koloru można zmienić ostatni bit (bit nr 0) każdej składowej RGB. Modyfikacja ta jest praktycznie niezauważalna dla ludzkiego oka.
-    - Dla obrazu 24-bitowego (po 8 bitów na każdy z kanałów R, G i B) możliwe jest ukrycie znacznej ilości danych w stosunku do obrazu 8-bitowego (jednokanałowego).
+<div align="center">
+Zespół G2 (steganografia obrazu): <br/> <b>Przemysław Barcicki (260324), Tomasz Chojnacki (260365), Jakub Zehner (260285)</b>
+</div>
 
-2. Ukrywanie danych w częściach mało zauważalnych (Transform Domain):
-    - Ta metoda polega na modyfikacji danych obrazu w jego domenie transformacyjnej, a nie bezpośrednio w domenie przestrzennej (czyli na pikselach).
-    - Przykłady technik obejmują:
-        - DCT (Discrete Cosine Transform): Popularna w obrazach JPEG. Informacja jest ukrywana w współczynnikach DCT obrazu. DCT dzieli obraz na bloki, a dane można wprowadzić w blokach o wysokiej częstotliwości, co czyni tę metodę mniej podatną na detekcję.
-        - DWT (Discrete Wavelet Transform): Obraz jest dzielony na częstotliwości (niska i wysoka częstotliwość), a ukrywanie danych odbywa się zazwyczaj w wysokich częstotliwościach. Jest to bardziej zaawansowana metoda niż DCT.
+## Sprint 1 (11 października - 17 października)
 
-3. Metoda przesunięcia kolorów:
-    - Polega na delikatnej modyfikacji składowych koloru (np. R, G, B), zmieniając ich wartości w sposób, który nie jest zauważalny dla ludzkiego oka.
-    - Można tu stosować techniki takie jak dodawanie lub odejmowanie wartości koloru o określonej wielkości w celu zakodowania informacji.
+Przeprowadzono wstępny przegląd literaturowy dotyczący wybranego przez grupę tematu (steganografia obrazu). W jego wyniku znaleziono następujące sposoby ukrywania treści w obrazach: **metoda najmniej znaczącego bitu** (LSB), **ukrywanie danych w częściach mało zauważalnych** (transform domain; np. DCT, DWT), **metoda przesunięcia kolorów**, **maskowanie i filtrowanie**, **metoda rozpraszania** (spread spectrum), **steganografia w warstwach alfa**. Wyniki realizacji tego etapu znajdują się w pliku `docs/initial-research.md`. *Ta część była wykonywana w większości przez Przemysława Barcickiego i Jakuba Zehnera.*
 
-4. Maskowanie i filtrowanie:
-    - Jest to bardziej zaawansowana technika, która wykorzystuje maski bitowe i filtrowanie, aby zakodować informację w obrazie. Stosowana jest głównie w obrazach w odcieniach szarości. Pochodna tej techniki jest używana przy kryptografi wizualnej, gdzie obraz wyjściowy jest osiągalny tylko i wyłącznie z obrazem "kluczem".
-    - Polega na ukrywaniu danych w intensywnościach pikseli za pomocą maski bitowej, co jest szczególnie użyteczne w obrazach medycznych lub innych obrazach o wysokiej jakości, gdzie subtelne zmiany mogą być mniej zauważalne.
+Wybrano technologię do realizacji projektu. Jest to **JavaScript**, co pozwoli tworzyć interaktywne wizualizacje bezpośrednio w przeglądarce internetowej. Do utworzenia układu strony wykorzystano **HTML** i **CSS** oraz bibliotekę Angular. Planowano również wykorzystać WebAssembly (WASM) w celu przyspieszenia kluczowych niskopoziomowych operacji. Wersję online projektu można znaleźć pod adresem [pwr-acs-se-24.github.io/EoSaKAfDaD](https://pwr-acs-se-24.github.io/EoSaKAfDaD/).
 
-5. Metoda rozpraszania (Spread Spectrum):
-    - Polega na rozproszeniu ukrywanej informacji na wiele pikseli w obrazie, przez co trudniej jest wykryć zakodowaną informację. Jest bardziej odporna na kompresję i inne techniki przetwarzania obrazu.
-    - W tej metodzie używa się sekwencji pseudolosowych do wyboru pikseli, w których zostaną ukryte dane, co czyni tę metodę bardziej odporną na próby ekstrakcji danych.
+Utworzono szablon strony z paskiem bocznym, na którym umieszczane będą kolejne implementowane algorytmy. Dokonano wstępnej implementacji algorytmu **LSB**, w wariancie zezwalającym na zapis jedynie wiadomości zgodnych z kodem ASCII, niewykorzystującym kanału alfa oraz zerującym niewykorzystane bity. *Ta część była wykonywana w większości przez Tomasza Chojnackiego.*
 
-6. Steganografia w warstwach alfa (kanał przezroczystości):
-    - Jeśli obraz zawiera kanał alfa (odpowiedzialny za przezroczystość), możliwe jest ukrycie informacji w wartościach przezroczystości pikseli.
-    - Metoda ta polega na modyfikacji wartości alfa w taki sposób, aby zmiany były subtelne i niewidoczne dla ludzkiego oka, ale wystarczające do zakodowania danych.
+*Na następny etap zaplanowano ulepszenie algorytmu LSB oraz rozpoczęcie implementacji algorytmu DCT.*
 
-Źródła:
-- R. Chandramouli, N. Memon "Analysis of LSB Based Image Steganography Techniques"
-- C.P. Sumathi, T. Santanam, G. Umamaheswari "A Study of Various Steganographic Techniques Used for Information Hiding"
-- S. Katzenbeisser, F. Petitcolas "Information Hiding Techniques for Steganography and Digital Watermaking"
+## Sprint 2 (18 października - 24 października)
+
+Dokonano ulepszenia oraz optymalizacji algorytmu **LSB**. W tym celu zaimplementowano możliwość zapisu dowolnych danych binarnych, algorytm zapisuje od teraz również dane w kanale alfa, a niewykorzystane bity nie są zerowane. Prędkość wykonywania algorytmu wzrosła kilkukrotnie. *Ta część była wykonywana w większości przez Tomasza Chojnackiego.*
+
+Pogłębiono badania nad steganografią obrazu. Znaleziono powiązane z tematem projektu zagadnienia, które warto byłoby zgłębić w kolejnych etapach realizacji. Są to **kryptografia wizualna** oraz **ukrywanie w metadanych**.
+
+Rozpoczęto pracę nad implementacją algorytmu **DCT**. W tym celu dokonano dogłębnego przeglądu literatury dotyczącej tej metody, przetestowano alternatywne implementacje oraz zbadano działanie formatu **JPEG**. *Ta część była wykonywana w większości przez Przemysława Barcickiego i Jakuba Zehnera.*
+
+*Na następny etap zaplanowano kontynuację prac nad algorytmem DCT, oraz poprawę drobnych błędów w projekcie.*
+
+## Sprint 3 (25 października - 7 listopada)
+
+Kontynuowano prace nad implementacją **DCT**. Zaimplementowano roboczą wersję algorytmu, która zostanie poprawiona w następnych etapach. W tym momencie nie dokonano jeszcze analizy porównawczej DCT z LSB. *Ta część była wykonywana w większości przez Przemysława Barcickiego i Jakuba Zehnera.*
+
+Dokonano drobnych poprawek w projekcie, takich jak poprawa wyglądu i funkcjonalności strony, pod względem ergonomii przesyłania i pobierania analizowanych obrazów. *Ta część była wykonywana w większości przez Tomasza Chojnackiego.*
+
+*Na następny etap zaplanowano finalizację algorytmu DCT oraz rozpoczęcie prac nad ukrywaniem w metadanych oraz budowę narzędzia do zniekształcania obrazów.*
