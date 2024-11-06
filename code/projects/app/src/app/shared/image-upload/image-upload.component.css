@@ -1,1 +1,48 @@
-/* TODO: Add nicer styling */
+div {
+  margin: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: 2px dashed #aaaaaa;
+  text-align: center;
+  transition-duration: 0.5s;
+}
+
+input {
+  width: 0px;
+  height: 0px;
+}
+
+label strong {
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.hovered {
+  background-color: #dddddd;
+}
+
+@keyframes flashRed {
+  from {
+    background-color: #ff4136;
+  }
+  to {
+    background-color: inherit;
+  }
+}
+
+.flashRed {
+  animation: flashRed 2s forwards;
+}
+
+@keyframes flashGreen {
+  from {
+    background-color: #2ecc40;
+  }
+  to {
+    background-color: inherit;
+  }
+}
+
+.flashGreen {
+  animation: flashGreen 2s forwards;
+}
