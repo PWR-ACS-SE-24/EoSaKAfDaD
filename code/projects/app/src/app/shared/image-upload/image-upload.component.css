@@ -2,7 +2,7 @@ div {
   margin: 1rem;
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
-  border: 2px dashed #aaaaaa;
+  border: 2px dashed var(--app-gray);
   text-align: center;
   transition-duration: 0.5s;
 }
@@ -18,12 +18,12 @@ label strong {
 }
 
 .hovered {
-  background-color: #dddddd;
+  background-color: var(--app-silver);
 }
 
 @keyframes flashRed {
   from {
-    background-color: #ff4136;
+    background-color: var(--app-red);
   }
   to {
     background-color: inherit;
@@ -36,7 +36,7 @@ label strong {
 
 @keyframes flashGreen {
   from {
-    background-color: #2ecc40;
+    background-color: var(--app-green);
   }
   to {
     background-color: inherit;
