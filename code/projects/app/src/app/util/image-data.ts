@@ -19,7 +19,7 @@ export function dataUrl(image: ImageData, type: string = "image/png"): string {
   const canvas = document.createElement("canvas");
   canvas.width = image.width;
   canvas.height = image.height;
-  canvas.getContext("2d")?.putImageData(image, 0, 0);
+  canvas.getContext("2d")!.putImageData(image, 0, 0);
   return canvas.toDataURL(type);
 }
 

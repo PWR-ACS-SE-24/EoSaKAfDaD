@@ -31,3 +31,11 @@ Kontynuowano prace nad implementacją **DCT**. Zaimplementowano roboczą wersję
 Dokonano drobnych poprawek w projekcie, takich jak poprawa wyglądu i funkcjonalności strony, pod względem ergonomii przesyłania i pobierania analizowanych obrazów. *Ta część była wykonywana w większości przez Tomasza Chojnackiego.*
 
 *Na następny etap zaplanowano finalizację algorytmu DCT oraz rozpoczęcie prac nad ukrywaniem w metadanych oraz budowę narzędzia do zniekształcania obrazów.*
+
+## Sprint 4 (8 listopada - 21 listopada)
+
+...
+
+## Sprint 5 (22 listopada - 28 listopada)
+
+...

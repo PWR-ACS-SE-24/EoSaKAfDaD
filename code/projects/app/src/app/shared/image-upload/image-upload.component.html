@@ -1,8 +1,21 @@
-<div>
-  <!-- TODO: Add a drag&drop file upload -->
+<div
+  (dragover)="onDragOver($event)"
+  (dragenter)="cancelEvent($event)"
+  (dragleave)="onDragLeave($event)"
+  (drop)="onDrop($event)"
+  [class.hovered]="isHovered"
+  [class.flashRed]="isFlashRed"
+  [class.flashGreen]="isFlashGreen"
+>
   <input
+    [id]="inputId"
+    [name]="inputId"
     type="file"
     [accept]="supportedMimeTypes.join(',')"
-    (change)="onFileChange($event)"
+    (change)="onInputChange($event)"
   />
+  <label [for]="inputId">
+    <strong>Wybierz plik</strong> <br />
+    lub przeciągnij go tutaj.
+  </label>
 </div>

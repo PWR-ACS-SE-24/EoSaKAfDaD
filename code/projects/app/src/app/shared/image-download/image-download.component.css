@@ -1,8 +1,45 @@
-/* TODO: Add nicer styling */
+.wrapper {
+  display: inline-flex;
+  margin: 1rem;
+  padding: 0.25rem 1rem;
+  border: 2px solid var(--app-gray);
+  border-radius: 0.5rem;
+  position: relative;
+  cursor: default;
+  user-select: none;
+}
 
-a {
-  padding: 0.25rem;
-  background: var(--app-silver);
-  border: 1px solid var(--app-black);
-  border-radius: 0.25rem;
+.wrapper[aria-disabled] {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.wrapper ul {
+  display: none;
+  position: absolute;
+  right: -2px;
+  top: 100%;
+  color: var(--app-white);
+  background: var(--app-navy);
+  border: 2px solid var(--app-gray);
+  border-radius: 0 0 0.5rem 0.5rem;
+  overflow: hidden;
+}
+
+.wrapper:not([aria-disabled]):hover {
+  border-bottom-right-radius: 0;
+}
+
+.wrapper:hover ul {
+  display: block;
+}
+
+.wrapper a {
+  display: block;
+  padding: 0.25rem 0.5rem;
+  transition-duration: 0.25s;
+}
+
+.wrapper a:hover {
+  background: var(--app-blue);
 }
