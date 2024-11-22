@@ -1,11 +1,11 @@
 import { Component } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { BehaviorSubject, combineLatest, map, Observable, Subject } from "rxjs";
+import { BehaviorSubject, combineLatest, map, Subject } from "rxjs";
 import { ImageDisplayComponent } from "../../shared/image-display/image-display.component";
 import { ImageUploadComponent } from "../../shared/image-upload/image-upload.component";
 import { ImageDownloadComponent } from "../../shared/image-download/image-download.component";
 import { SliderComponent } from "./slider/slider.component";
-import { toolScale, toolNoise } from "steg";
+import { toolScale, toolNoise, toolBrightness, toolContrast } from "steg";
 
 @Component({
   selector: "app-e4",
@@ -23,18 +23,18 @@ import { toolScale, toolNoise } from "steg";
 export class E4Component {
   protected readonly scaleSubject = new BehaviorSubject(100);
   protected readonly noiseSubject = new BehaviorSubject(0);
-  protected readonly blurSubject = new BehaviorSubject(0);
-  protected readonly contrastSubject = new BehaviorSubject(100);
+  protected readonly brighnessSubject = new BehaviorSubject(0);
+  protected readonly contrastSubject = new BehaviorSubject(0);
   private readonly change$ = combineLatest([
     this.scaleSubject,
     this.noiseSubject,
-    this.blurSubject,
+    this.brighnessSubject,
     this.contrastSubject,
   ]).pipe(
-    map(([scale, noise, blur, contrast]) => ({
+    map(([scale, noise, brightness, contrast]) => ({
       scale,
       noise,
-      blur,
+      brightness,
       contrast,
     }))
   );
@@ -45,8 +45,11 @@ export class E4Component {
     this.oldImage$,
     this.change$,
   ]).pipe(
-    map(([image, { scale, noise, blur, contrast }]) =>
-      toolNoise(toolScale(image, scale), noise)
+    map(([image, { scale, noise, brightness, contrast }]) =>
+      toolContrast(
+        toolBrightness(toolNoise(toolScale(image, scale), noise), brightness),
+        contrast
+      )
     )
   );
 

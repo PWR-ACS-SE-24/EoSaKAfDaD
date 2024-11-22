@@ -17,22 +17,22 @@
       label="Szum"
       [subject]="noiseSubject"
       [min]="0"
-      [max]="100"
+      [max]="50"
       [step]="5"
     ></app-slider>
     <app-slider
-      label="Rozmycie"
-      [subject]="blurSubject"
-      [min]="0"
-      [max]="100"
-      [step]="5"
+      label="Jasność"
+      [subject]="brighnessSubject"
+      [min]="-200"
+      [max]="200"
+      [step]="10"
     ></app-slider>
     <app-slider
       label="Kontrast"
       [subject]="contrastSubject"
-      [min]="50"
-      [max]="150"
-      [step]="5"
+      [min]="-200"
+      [max]="200"
+      [step]="10"
     ></app-slider>
     <div class="arrow">➜</div>
   </section>
