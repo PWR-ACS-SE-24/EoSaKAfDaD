@@ -1,15 +1,18 @@
 import { Component } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { BehaviorSubject, combineLatest, map, Subject } from "rxjs";
+import { BehaviorSubject, combineLatest, map, Observable, Subject } from "rxjs";
 import { ImageDisplayComponent } from "../../shared/image-display/image-display.component";
 import { ImageUploadComponent } from "../../shared/image-upload/image-upload.component";
 import { ImageDownloadComponent } from "../../shared/image-download/image-download.component";
+import { SliderComponent } from "./slider/slider.component";
+import { toolScale, toolNoise } from "steg";
 
 @Component({
   selector: "app-e4",
   standalone: true,
   imports: [
     CommonModule,
+    SliderComponent,
     ImageDisplayComponent,
     ImageUploadComponent,
     ImageDownloadComponent,
@@ -41,10 +44,15 @@ export class E4Component {
   protected readonly newImage$ = combineLatest([
     this.oldImage$,
     this.change$,
-  ]).pipe(map(([image, { scale, noise, blur, contrast }]) => image));
+  ]).pipe(
+    map(([image, { scale, noise, blur, contrast }]) =>
+      toolNoise(toolScale(image, scale), noise)
+    )
+  );
 
-  protected int(text: string): number {
-    return parseInt(text, 10);
+  protected dimensions(image: ImageData | null): string | null {
+    if (!image) return null;
+    return `${image.width} x ${image.height}`;
   }
 
   protected onImageUpload(image: ImageData): void {
