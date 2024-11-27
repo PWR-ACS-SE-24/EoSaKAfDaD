@@ -1,10 +1,9 @@
-use crate::image_data::create_image_data;
+use crate::image_data::{create_image_data, RGBA_CHANNELS};
 use wasm_bindgen::prelude::*;
 use web_sys::ImageData;
 
 const ASCII_CHAR_BITS: usize = 7;
 const ASCII_CHAR_MASK: u8 = 0b01111111;
-const RGBA_CHANNELS: usize = 4;
 
 #[wasm_bindgen(js_name = lsbHighlight)]
 pub fn lsb_highlight(image: &ImageData) -> ImageData {

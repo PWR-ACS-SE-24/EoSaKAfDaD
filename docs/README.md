@@ -34,7 +34,9 @@ Dokonano drobnych poprawek w projekcie, takich jak poprawa wyglądu i funkcjonal
 
 ## Sprint 4 (8 listopada - 21 listopada)
 
-...
+Wykonano całe narzędzie do **edycji** obrazów, pozwalające na skalowanie, dodawanie szumu, zmianę jasności i kontrastu. Umożliwi ono sprawdzenie odporności algorytmów steganograficznych na różne rodzaje zniekształceń. *Ta część była wykonywana w większości przez Tomasza Chojnackiego.*
+
+W wyniku nieprzewidzianych komplikacji (długość dokumentacji JPEG) postanowiono poświęcić kolejny etap na research dotyczący **DCT**. *Ta część była wykonywana w większości przez Przemysława Barcickiego i Jakuba Zehnera.*
 
 ## Sprint 5 (22 listopada - 28 listopada)
 

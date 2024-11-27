@@ -1,0 +1,44 @@
+<h1>Etap 4: Edytor zniekształcający obrazy</h1>
+<div class="grid">
+  <section>
+    <app-image-display [image$]="oldImage$"></app-image-display>
+    {{ dimensions(oldImage$ | async) }}
+    <app-image-upload (imageChange)="onImageUpload($event)"></app-image-upload>
+  </section>
+  <section>
+    <app-slider
+      label="Skala"
+      [subject]="scaleSubject"
+      [min]="10"
+      [max]="200"
+      [step]="10"
+    ></app-slider>
+    <app-slider
+      label="Szum"
+      [subject]="noiseSubject"
+      [min]="0"
+      [max]="50"
+      [step]="5"
+    ></app-slider>
+    <app-slider
+      label="Jasność"
+      [subject]="brighnessSubject"
+      [min]="-200"
+      [max]="200"
+      [step]="10"
+    ></app-slider>
+    <app-slider
+      label="Kontrast"
+      [subject]="contrastSubject"
+      [min]="-200"
+      [max]="200"
+      [step]="10"
+    ></app-slider>
+    <div class="arrow">➜</div>
+  </section>
+  <section>
+    <app-image-display [image$]="newImage$"></app-image-display>
+    {{ dimensions(newImage$ | async) }}
+    <app-image-download [image$]="newImage$"></app-image-download>
+  </section>
+</div>
