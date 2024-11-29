@@ -7,10 +7,10 @@ const ASCII_CHAR_MASK: u8 = 0b01111111;
 
 #[wasm_bindgen(js_name = lsbHighlight)]
 pub fn lsb_highlight(image: &ImageData) -> ImageData {
-    let mut data = Vec::with_capacity(image.data().len());
-    for i in 0..image.data().len() {
+    let mut data = image.data().0;
+    for (i, byte) in data.iter_mut().enumerate() {
         let scale = u8::MAX / if i % RGBA_CHANNELS == 3 { 2 } else { 1 };
-        data.push((u8::MAX - scale) + (image.data()[i] & 1) * scale);
+        *byte = (u8::MAX - scale) + (*byte & 1) * scale;
     }
     create_image_data(&data, image.width())
 }
@@ -26,14 +26,15 @@ pub fn lsb1_embed_text(image: &ImageData, text: &str) -> ImageData {
         }
     }
 
-    let mut data = Vec::with_capacity(image.data().len());
-    for (i, bytes) in image.data().chunks(RGBA_CHANNELS).enumerate() {
+    let old_data = image.data().0;
+    let mut new_data = Vec::with_capacity(old_data.len());
+    for (i, bytes) in old_data.chunks(RGBA_CHANNELS).enumerate() {
         for (j, byte) in bytes[..3].iter().enumerate() {
-            data.push(byte & !1 | bits.get(i * 3 + j).copied().unwrap_or_default());
+            new_data.push(byte & !1 | bits.get(i * 3 + j).copied().unwrap_or_default());
         }
-        data.push(u8::MAX);
+        new_data.push(u8::MAX);
     }
-    create_image_data(&data, image.width())
+    create_image_data(&new_data, image.width())
 }
 
 #[wasm_bindgen(js_name = lsb1extractText)]
