@@ -18,3 +18,12 @@ section {
   font-size: 3rem;
   font-weight: bold;
 }
+
+label {
+  text-align: center;
+}
+
+select {
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+}

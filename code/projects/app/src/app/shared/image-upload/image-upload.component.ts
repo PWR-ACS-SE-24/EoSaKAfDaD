@@ -57,12 +57,14 @@ export class ImageUploadComponent {
     requestAnimationFrame(() => {
       if (!file || !this.supportedMimeTypes.includes(file.type)) {
         this.isFlashRed = true;
+        setTimeout(() => (this.isFlashRed = false), 2000);
         return;
       }
 
       fromFile(file).then((image) => {
         this.imageChange.emit(image);
         this.isFlashGreen = true;
+        setTimeout(() => (this.isFlashGreen = false), 2000);
       });
     });
   }

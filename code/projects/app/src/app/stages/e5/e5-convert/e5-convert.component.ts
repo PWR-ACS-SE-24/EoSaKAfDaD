@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
-import { map, Subject } from "rxjs";
+import { CommonModule } from "@angular/common";
+import { BehaviorSubject, combineLatestWith, map, Subject } from "rxjs";
 import { vcMakeMonochrome } from "steg";
 import { ImageDisplayComponent } from "../../../shared/image-display/image-display.component";
 import { ImageUploadComponent } from "../../../shared/image-upload/image-upload.component";
@@ -11,16 +12,23 @@ import { ImageDownloadComponent } from "../../../shared/image-download/image-dow
   templateUrl: "./e5-convert.component.html",
   styleUrl: "./e5-convert.component.css",
   imports: [
+    CommonModule,
     ImageDisplayComponent,
     ImageUploadComponent,
     ImageDownloadComponent,
   ],
 })
 export class E5ConvertComponent {
+  protected readonly grayscaleSubject = new BehaviorSubject("luminosity");
+  protected readonly ditheringSubject = new BehaviorSubject("floyd-steinberg");
+
   private readonly imageSubject = new Subject<ImageData>();
   protected readonly oldImage$ = this.imageSubject.asObservable();
   protected readonly newImage$ = this.oldImage$.pipe(
-    map((image) => vcMakeMonochrome(image, "average", "random"))
+    combineLatestWith(this.grayscaleSubject, this.ditheringSubject),
+    map(([image, grayscale, dithering]) =>
+      vcMakeMonochrome(image, grayscale, dithering)
+    )
   );
 
   protected onImageUpload(image: ImageData): void {

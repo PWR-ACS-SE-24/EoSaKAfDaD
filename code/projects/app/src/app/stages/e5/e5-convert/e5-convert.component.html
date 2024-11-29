@@ -3,6 +3,29 @@
   <app-image-upload (imageChange)="onImageUpload($event)"></app-image-upload>
 </section>
 <section>
+  <label>
+    Szarość <br />
+    <select
+      #grayscaleSelect
+      [value]="grayscaleSubject | async"
+      (change)="grayscaleSubject.next(grayscaleSelect.value)"
+    >
+      <option value="average">Średnia</option>
+      <option value="luminosity">Jasność</option>
+    </select>
+  </label>
+  <label>
+    Dithering <br />
+    <select
+      #ditheringSelect
+      [value]="ditheringSubject | async"
+      (change)="ditheringSubject.next(ditheringSelect.value)"
+    >
+      <option value="threshold">Próg</option>
+      <option value="random">Losowy</option>
+      <option value="floyd-steinberg">Floyd-Steinberg</option>
+    </select>
+  </label>
   <div class="arrow">➜</div>
 </section>
 <section>
