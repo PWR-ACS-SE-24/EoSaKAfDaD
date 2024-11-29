@@ -9,7 +9,11 @@ import {
 @Component({
   selector: "app-tabber-tab",
   standalone: true,
-  template: "<div [hidden]='!active'><ng-content></ng-content></div>",
+  host: {
+    "[hidden]": "!active",
+  },
+  template: "<ng-content></ng-content>",
+  styles: [":host { flex: 1; } :host[hidden] { display: none; }"],
 })
 export class TabberTabComponent {
   @Input({ required: true }) public name!: string;
