@@ -1,1 +1,11 @@
-<p>e5-convert works!</p>
+<section>
+  <app-image-display [image$]="oldImage$"></app-image-display>
+  <app-image-upload (imageChange)="onImageUpload($event)"></app-image-upload>
+</section>
+<section>
+  <div class="arrow">➜</div>
+</section>
+<section>
+  <app-image-display [image$]="newImage$"></app-image-display>
+  <app-image-download [image$]="newImage$"></app-image-download>
+</section>
