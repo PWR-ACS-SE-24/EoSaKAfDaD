@@ -1,0 +1,20 @@
+ul {
+  display: flex;
+  gap: 0.1rem;
+  border-bottom: 2px solid var(--app-navy);
+  margin: 1rem 0;
+}
+
+li {
+  background-color: var(--app-navy);
+  color: var(--app-white);
+  border: 2px solid var(--app-navy);
+  border-bottom: none;
+  border-radius: 0.5rem 0.5rem 0 0;
+  padding: 0.1rem 1rem;
+  cursor: pointer;
+}
+
+li.active {
+  background-color: var(--app-blue);
+}

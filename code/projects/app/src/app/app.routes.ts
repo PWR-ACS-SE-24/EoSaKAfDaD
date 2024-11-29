@@ -25,6 +25,12 @@ export const stageRoutes: Routes = [
     loadComponent: () =>
       import("./stages/e4/e4.component").then((m) => m.E4Component),
   },
+  {
+    path: "e5",
+    title: "E5 (VC)",
+    loadComponent: () =>
+      import("./stages/e5/e5.component").then((m) => m.E5Component),
+  },
 ];
 
 export const routes: Routes = [...stageRoutes];

@@ -23,9 +23,9 @@ pub fn tool_scale(image: &ImageData, scale: u32) -> ImageData {
 }
 
 #[wasm_bindgen(js_name = toolNoise)]
-pub fn tool_noise(image: &ImageData, amount: u32) -> ImageData {
+pub fn tool_noise(image: &ImageData, amount: u32, seed: Option<u32>) -> ImageData {
     let amount = amount.clamp(0, 100);
-    let mut rng = StdRand::seed(amount as u64);
+    let mut rng = StdRand::seed(seed.unwrap_or_default() as u64);
     image.map_rgb(|v| {
         let noise = rng.next_u32() & 0xFF;
         ((v as u32 * (100 - amount) + noise * amount) / 100) as u8
