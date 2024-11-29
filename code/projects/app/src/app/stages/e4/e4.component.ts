@@ -32,7 +32,7 @@ export class E4Component {
     combineLatestWith(this.scaleSubject),
     map(([i, scale]) => toolScale(i, scale)),
     combineLatestWith(this.noiseSubject),
-    map(([i, noise]) => toolNoise(i, noise)),
+    map(([i, noise]) => toolNoise(i, noise, Date.now())),
     combineLatestWith(this.brighnessSubject),
     map(([i, brightness]) => toolBrightness(i, brightness)),
     combineLatestWith(this.contrastSubject),
