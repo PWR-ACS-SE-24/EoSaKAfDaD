@@ -1,1 +1,21 @@
-<p>e5-merge works!</p>
+<section>
+  <app-image-upload
+    (imageChange)="onLeftUpload($event)"
+    [validators]="uploadValidators"
+  ></app-image-upload>
+</section>
+<section>
+  <app-image-upload
+    (imageChange)="onRightUpload($event)"
+    [validators]="uploadValidators"
+  ></app-image-upload>
+</section>
+<section class="align-section">
+  <div class="lower">
+    <app-image-display [image$]="left$"></app-image-display>
+    <div class="higher" [style.left]="offset + '%'">
+      <app-image-display [image$]="right$"></app-image-display>
+    </div>
+  </div>
+  <input type="range" min="-80" max="80" step="2" [(ngModel)]="offset" />
+</section>

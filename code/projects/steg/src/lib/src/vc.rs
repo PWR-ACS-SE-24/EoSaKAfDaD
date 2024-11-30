@@ -191,3 +191,12 @@ pub fn vc_split(image: &ImageData, seed: Option<u32>) -> VcSplit {
 
     VcSplit(pixels_to_image(pl), pixels_to_image(pr))
 }
+
+#[wasm_bindgen(js_name = vcMakeMask)]
+pub fn vc_make_mask(image: &ImageData) -> ImageData {
+    let mut data = image.data().0;
+    for i in (0..data.len()).step_by(RGBA_CHANNELS) {
+        data[i + 3] = u8::MAX - data[i];
+    }
+    create_image_data(&data, image.width())
+}
