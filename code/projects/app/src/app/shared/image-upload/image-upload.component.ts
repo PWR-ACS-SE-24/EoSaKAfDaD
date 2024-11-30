@@ -1,5 +1,10 @@
-import { Component, EventEmitter, Output } from "@angular/core";
+import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { fromFile } from "../../util/image-data";
+
+type Validator = {
+  validate: (image: ImageData) => boolean;
+  message: string;
+};
 
 @Component({
   selector: "app-image-upload",
@@ -10,6 +15,7 @@ import { fromFile } from "../../util/image-data";
 })
 export class ImageUploadComponent {
   @Output() public readonly imageChange = new EventEmitter<ImageData>();
+  @Input() public validators: Validator[] = [];
 
   protected readonly inputId = crypto.randomUUID();
   protected readonly supportedMimeTypes = [
@@ -19,8 +25,8 @@ export class ImageUploadComponent {
   ];
 
   protected isHovered = false;
-  protected isFlashRed = false;
-  protected isFlashGreen = false;
+  protected flashClass: "red" | "green" | null = null;
+  private flashTimeout: number | null = null;
 
   protected cancelEvent(event: Event): void {
     event.preventDefault();
@@ -43,6 +49,16 @@ export class ImageUploadComponent {
     this.handleFile(event.dataTransfer?.files?.[0]);
   }
 
+  private flash(type: "red" | "green"): void {
+    if (this.flashTimeout) {
+      clearTimeout(this.flashTimeout);
+      this.flashTimeout = null;
+    }
+    this.flashClass = null;
+    requestAnimationFrame(() => (this.flashClass = type));
+    this.flashTimeout = window.setTimeout(() => (this.flashClass = null), 2000);
+  }
+
   protected onInputChange(event: Event): void {
     this.cancelEvent(event);
     const input = event.currentTarget;
@@ -51,20 +67,24 @@ export class ImageUploadComponent {
   }
 
   private handleFile(file: File | null | undefined): void {
-    this.isFlashRed = false;
-    this.isFlashGreen = false;
-
     requestAnimationFrame(() => {
       if (!file || !this.supportedMimeTypes.includes(file.type)) {
-        this.isFlashRed = true;
-        setTimeout(() => (this.isFlashRed = false), 2000);
+        this.flash("red");
+        alert("Niewspierany format pliku!");
         return;
       }
 
       fromFile(file).then((image) => {
+        for (const validator of this.validators) {
+          if (!validator.validate(image)) {
+            this.flash("red");
+            alert(validator.message);
+            return;
+          }
+        }
+
         this.imageChange.emit(image);
-        this.isFlashGreen = true;
-        setTimeout(() => (this.isFlashGreen = false), 2000);
+        this.flash("green");
       });
     });
   }

@@ -1,1 +1,14 @@
-<p>e5-split works!</p>
+<section class="upload-section">
+  <app-image-upload
+    (imageChange)="onImageUpload($event)"
+    [validators]="uploadValidators"
+  ></app-image-upload>
+</section>
+<section>
+  <app-image-display [image$]="left$"></app-image-display>
+  <app-image-download [image$]="left$"></app-image-download>
+</section>
+<section>
+  <app-image-display [image$]="right$"></app-image-display>
+  <app-image-download [image$]="right$"></app-image-download>
+</section>
