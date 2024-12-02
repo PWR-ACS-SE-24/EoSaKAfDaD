@@ -1,0 +1,17 @@
+:host {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.upload-section {
+  grid-column: span 2;
+}
+
+section:not(.upload-section) {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

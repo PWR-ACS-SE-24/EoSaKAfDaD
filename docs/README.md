@@ -38,6 +38,16 @@ Wykonano całe narzędzie do **edycji** obrazów, pozwalające na skalowanie, do
 
 W wyniku nieprzewidzianych komplikacji (długość dokumentacji JPEG) postanowiono poświęcić kolejny etap na research dotyczący **DCT**. *Ta część była wykonywana w większości przez Przemysława Barcickiego i Jakuba Zehnera.*
 
+*Na następny etap zaplanowano dalsze prace nad DCT oraz badania nad kryptografią wizualną.*
+
 ## Sprint 5 (22 listopada - 28 listopada)
+
+Zaimplementowano główną część algorytmu **DCT** dla obrazów JPEG. Możliwe jest ukrycie oraz odczytanie dowolnej wiadomości tekstowej i binarnej z różnymi ustawieniami liczby wykorzystanych bitów i jakości obrazu. *Ta część była wykonywana w większości przez Przemysława Barcickiego.*
+
+Dodano narzędzie do **kryptografii wizualnej** dla obrazów monochromatycznych. Dla ułatwienia pracy, udostępnione jest też narzędzie do zamiany obrazów kolorowych i potencjalnie przezroczystych na czarno-białe stosując dwie metody zamiany na skalę szarości (średnia i jasność) oraz trzy metody monochromatyzacji (progowanie, dithering losowy i dithering Floyda-Steinberga). Następnie, narzędzie dzieli obraz na dwie części, które po nałożeniu na siebie dają obraz podobny do oryginalnego. *Ta część była wykonywana w większości przez Tomasza Chojnackiego.*
+
+*Na następny etap zaplanowano ukończenie prac nad DCT, dodanie narzędzia do porównywania dwóch obrazów oraz powrót do prac nad ukrywaniem w metadanych.*
+
+## Sprint 6 (29 listopada - 5 grudnia)
 
 ...

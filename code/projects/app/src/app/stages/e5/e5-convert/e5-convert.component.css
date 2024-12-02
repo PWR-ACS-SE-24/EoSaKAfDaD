@@ -1,0 +1,29 @@
+:host {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr;
+  grid-gap: 1rem;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.arrow {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+label {
+  text-align: center;
+}
+
+select {
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+}

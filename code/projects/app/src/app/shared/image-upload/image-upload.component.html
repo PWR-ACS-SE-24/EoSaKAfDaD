@@ -4,8 +4,8 @@
   (dragleave)="onDragLeave($event)"
   (drop)="onDrop($event)"
   [class.hovered]="isHovered"
-  [class.flashRed]="isFlashRed"
-  [class.flashGreen]="isFlashGreen"
+  [class.flashRed]="flashClass == 'red'"
+  [class.flashGreen]="flashClass == 'green'"
 >
   <input
     [id]="inputId"
