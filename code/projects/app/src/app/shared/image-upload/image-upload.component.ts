@@ -16,6 +16,7 @@ type Validator = {
 export class ImageUploadComponent {
   @Output() public readonly imageChange = new EventEmitter<ImageData>();
   @Input() public validators: Validator[] = [];
+  @Output() public readonly fileChange = new EventEmitter<File>();
 
   protected readonly inputId = crypto.randomUUID();
   protected readonly supportedMimeTypes = [
@@ -84,6 +85,7 @@ export class ImageUploadComponent {
         }
 
         this.imageChange.emit(image);
+        this.fileChange.emit(file);
         this.flash("green");
       });
     });
