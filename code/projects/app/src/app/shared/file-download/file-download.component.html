@@ -1,0 +1,7 @@
+@if (data !== null) {
+  <div class="wrapper">
+    <a [href]="data.path" [download]="data.fileName">Pobierz</a>
+  </div>
+} @else {
+  <div class="wrapper" aria-disabled>Pobierz</div>
+}
