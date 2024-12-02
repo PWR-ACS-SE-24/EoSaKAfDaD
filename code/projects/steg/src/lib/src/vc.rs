@@ -3,9 +3,6 @@ use tinyrand::{Rand, Seeded, StdRand};
 use wasm_bindgen::prelude::*;
 use web_sys::ImageData;
 
-const BLACK: u8 = u8::MIN;
-const WHITE: u8 = u8::MAX;
-
 #[wasm_bindgen]
 #[derive(Clone, Copy, Debug)]
 pub enum VcGrayscale {
@@ -23,9 +20,9 @@ pub enum VcDithering {
 
 fn closest_palette_color(v: u8) -> u8 {
     if v < u8::MAX / 2 {
-        BLACK
+        u8::MIN
     } else {
-        WHITE
+        u8::MAX
     }
 }
 
@@ -44,10 +41,15 @@ fn pixels_to_image(pixels: Vec<Vec<u8>>) -> ImageData {
 }
 
 fn desaturate(image: &ImageData, grayscale: VcGrayscale) -> ImageData {
+    const Y: f64 = 0.299;
+    const U: f64 = 0.587;
+    const V: f64 = 0.114;
+
     image.map_pixels(|(r, g, b)| {
+        let (r, g, b) = (r as f64, g as f64, b as f64);
         let v = match grayscale {
-            VcGrayscale::Average => 0.333 * r as f64 + 0.333 * g as f64 + 0.333 * b as f64,
-            VcGrayscale::Luminosity => 0.299 * r as f64 + 0.587 * g as f64 + 0.114 * b as f64,
+            VcGrayscale::Average => (r + g + b) / 3.,
+            VcGrayscale::Luminosity => Y * r + U * g + V * b,
             _ => panic!("grayscale should have an allowed value"),
         } as u8;
         (v, v, v)
@@ -62,9 +64,9 @@ fn dither_random(image: &ImageData, seed: u64) -> ImageData {
     let mut rng = StdRand::seed(seed);
     image.map_pixels(|(v, _, _)| {
         let v = if v < rng.next_u16() as u8 {
-            BLACK
+            u8::MIN
         } else {
-            WHITE
+            u8::MAX
         };
         (v, v, v)
     })
@@ -129,7 +131,7 @@ pub fn vc_make_monochrome(
 pub fn vc_is_monochrome(image: &ImageData) -> bool {
     let data = image.data().0;
     for p in data.chunks_exact(RGBA_CHANNELS) {
-        if p[0] != p[1] || p[1] != p[2] || (p[0] != BLACK && p[0] != WHITE) || p[3] != u8::MAX {
+        if p[0] != p[1] || p[1] != p[2] || (p[0] != u8::MIN && p[0] != u8::MAX) || p[3] != u8::MAX {
             return false;
         }
     }
@@ -157,33 +159,33 @@ pub fn vc_split(image: &ImageData, seed: Option<u32>) -> VcSplit {
 
         match pattern {
             false => {
-                pl[y][x] = BLACK;
-                pl[y][x + 1] = WHITE;
-                pl[y + 1][x] = WHITE;
-                pl[y + 1][x + 1] = BLACK;
+                pl[y][x] = u8::MIN;
+                pl[y][x + 1] = u8::MAX;
+                pl[y + 1][x] = u8::MAX;
+                pl[y + 1][x + 1] = u8::MIN;
             }
             true => {
-                pl[y][x] = WHITE;
-                pl[y][x + 1] = BLACK;
-                pl[y + 1][x] = BLACK;
-                pl[y + 1][x + 1] = WHITE;
+                pl[y][x] = u8::MAX;
+                pl[y][x + 1] = u8::MIN;
+                pl[y + 1][x] = u8::MIN;
+                pl[y + 1][x + 1] = u8::MAX;
             }
         }
 
         let v = data[i * RGBA_CHANNELS];
 
         match (v, pattern) {
-            (BLACK, false) | (WHITE, true) => {
-                pr[y][x] = WHITE;
-                pr[y][x + 1] = BLACK;
-                pr[y + 1][x] = BLACK;
-                pr[y + 1][x + 1] = WHITE;
+            (u8::MIN, false) | (u8::MAX, true) => {
+                pr[y][x] = u8::MAX;
+                pr[y][x + 1] = u8::MIN;
+                pr[y + 1][x] = u8::MIN;
+                pr[y + 1][x + 1] = u8::MAX;
             }
-            (BLACK, true) | (WHITE, false) => {
-                pr[y][x] = BLACK;
-                pr[y][x + 1] = WHITE;
-                pr[y + 1][x] = WHITE;
-                pr[y + 1][x + 1] = BLACK;
+            (u8::MIN, true) | (u8::MAX, false) => {
+                pr[y][x] = u8::MIN;
+                pr[y][x + 1] = u8::MAX;
+                pr[y + 1][x] = u8::MAX;
+                pr[y + 1][x + 1] = u8::MIN;
             }
             _ => panic!("image should be monochrome"),
         }
