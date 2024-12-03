@@ -1,6 +1,5 @@
 import { Component } from "@angular/core";
 import { ImageDisplayComponent } from "../../../shared/image-display/image-display.component";
-import { ImageDownloadComponent } from "../../../shared/image-download/image-download.component";
 import { ImageUploadComponent } from "../../../shared/image-upload/image-upload.component";
 import { SliderComponent } from "../../e4/slider/slider.component";
 import { Subject, BehaviorSubject, combineLatest, debounceTime, distinctUntilChanged, map, from, switchMap } from "rxjs";
@@ -46,8 +45,7 @@ export class E3EncodeComponent {
     this.dataDensitySubject,
     this.textSubject.pipe(debounceTime(300), distinctUntilChanged()),
   ]).pipe(
-    map(([image, quality, dataDensity, text]) => this.encodeImage(text, quality, dataDensity, image)),
-    switchMap(result => result)
+    switchMap(([image, quality, dataDensity, text]) => this.encodeImage(text, quality, dataDensity, image)),
   );
 
   protected onImageChange(imageData: ImageData): void {

@@ -27,8 +27,7 @@ export class E3DecodeComponent {
   protected readonly textSubject = combineLatest([
     this.dataDensitySubject,
     this.fileSubject.pipe(
-      map((file) => file.arrayBuffer()),
-      switchMap(result => result),
+      switchMap(file => file.arrayBuffer()),
       map((buffer) => this.decodeImage(buffer))
     ),
   ]).pipe(

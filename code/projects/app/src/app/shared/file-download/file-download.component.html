@@ -1,4 +1,4 @@
-@if (download$ | async; as file) {
+@if (file$ | download | async; as file) {
   <div class="wrapper">
     <a [href]="file.path" [download]="file.fileName">Pobierz</a>
   </div>
