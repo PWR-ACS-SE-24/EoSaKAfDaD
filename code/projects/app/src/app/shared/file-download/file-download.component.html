@@ -1,6 +1,6 @@
-@if (data !== null) {
+@if (download$ | async; as file) {
   <div class="wrapper">
-    <a [href]="data.path" [download]="data.fileName">Pobierz</a>
+    <a [href]="file.path" [download]="file.fileName">Pobierz</a>
   </div>
 } @else {
   <div class="wrapper" aria-disabled>Pobierz</div>

@@ -52,10 +52,7 @@ export class E3DecodeComponent {
     for(let i = 0; i < Math.ceil(data.length / 8); i += 1) {
       characters[i] = data.slice(i * 8, (i + 1) * 8).reduce((acc, bit) => acc * 2 + bit, 0)
     }
+    
     return this.textDecoder.decode(characters)
-
-    
-    
-    // return characters.map(bits => bits.reduce((acc, bit) => acc * 2 + bit, 0)).map(c => String.fromCharCode(c)).join('')
   }
 }

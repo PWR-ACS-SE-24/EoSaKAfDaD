@@ -1,29 +1,28 @@
+import { AsyncPipe } from "@angular/common";
 import { Component, Input, OnInit } from "@angular/core";
-import { Observable } from "rxjs";
+import { Observable, Subject } from "rxjs";
 
 type DownloadData = {
   fileName: string;
   path: string;
-} | null;
+};
 
 @Component({
   selector: "app-file-download",
   standalone: true,
-  imports: [],
+  imports: [AsyncPipe],
   templateUrl: "./file-download.component.html",
   styleUrl: "./file-download.component.css",
 })
 export class FileDownloadComponent implements OnInit {
   @Input({ required: true }) public file$!: Observable<File>;
 
-  protected data: DownloadData = null;
+  private download = new Subject<DownloadData>();
+  protected download$ = this.download.asObservable()
 
-  public ngOnInit(): void {
+  ngOnInit(): void {
     this.file$.subscribe((file) => {
-      this.data = {
-        path: URL.createObjectURL(file),
-        fileName: file.name
-      }
-    });
+      this.download.next({fileName: file.name, path: URL.createObjectURL(file)})
+    })
   }
 }

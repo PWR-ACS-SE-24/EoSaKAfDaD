@@ -1,8 +1,8 @@
 :host {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-  }
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
   
 .grid {
   flex: 1;
