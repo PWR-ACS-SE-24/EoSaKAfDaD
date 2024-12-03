@@ -1,0 +1,24 @@
+.wrapper {
+  display: inline-flex;
+  margin: 1rem;
+  padding: 0.25rem 1rem;
+  border: 2px solid var(--app-gray);
+  border-radius: 0.5rem;
+  position: relative;
+  cursor: default;
+  user-select: none;
+}
+
+.wrapper[aria-disabled] {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.wrapper:hover {
+  background: var(--app-blue);
+}
+
+.wrapper a {
+  display: block;
+  transition-duration: 0.25s;
+}
