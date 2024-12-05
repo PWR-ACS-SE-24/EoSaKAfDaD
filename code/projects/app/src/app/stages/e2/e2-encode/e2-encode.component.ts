@@ -1,14 +1,14 @@
 import { Component } from "@angular/core";
 import { ImageDisplayComponent } from "../../../shared/image-display/image-display.component";
 import { ImageUploadComponent } from "../../../shared/image-upload/image-upload.component";
-import { SliderComponent } from "../../e4/slider/slider.component";
+import { SliderComponent } from "../../e3/slider/slider.component";
 import { Subject, BehaviorSubject, combineLatest, debounceTime, distinctUntilChanged, map, from, switchMap } from "rxjs";
 import { JPEGEncoder } from "../helpers/jpeg-encode";
 import { fromFile } from "../../../util/image-data";
 import { FileDownloadComponent } from "../../../shared/file-download/file-download.component";
 
 @Component({
-  selector: "app-e3-encode",
+  selector: "app-e2-encode",
   standalone: true,
   imports: [
     ImageDisplayComponent,
@@ -16,10 +16,10 @@ import { FileDownloadComponent } from "../../../shared/file-download/file-downlo
     SliderComponent,
     FileDownloadComponent
 ],
-  templateUrl: "./e3-encode.component.html",
-  styleUrl: "./e3-encode.component.css",
+  templateUrl: "./e2-encode.component.html",
+  styleUrl: "./e2-encode.component.css",
 })
-export class E3EncodeComponent {
+export class E2EncodeComponent {
   protected readonly textEncoder = new TextEncoder()
 
   // The problem with length of encoded text is that we can't know for sure how

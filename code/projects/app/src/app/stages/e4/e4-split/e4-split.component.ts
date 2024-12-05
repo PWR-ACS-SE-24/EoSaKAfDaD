@@ -6,17 +6,17 @@ import { ImageDisplayComponent } from "../../../shared/image-display/image-displ
 import { ImageDownloadComponent } from "../../../shared/image-download/image-download.component";
 
 @Component({
-  selector: "app-e5-split",
+  selector: "app-e4-split",
   standalone: true,
-  templateUrl: "./e5-split.component.html",
-  styleUrl: "./e5-split.component.css",
+  templateUrl: "./e4-split.component.html",
+  styleUrl: "./e4-split.component.css",
   imports: [
     ImageUploadComponent,
     ImageDisplayComponent,
     ImageDownloadComponent,
   ],
 })
-export class E5SplitComponent {
+export class E4SplitComponent {
   private readonly imageSubject = new Subject<ImageData>();
   protected readonly image$ = this.imageSubject.asObservable();
   protected readonly layers$ = this.image$.pipe(

@@ -1,16 +1,9 @@
-<h1>Etap 1: Metoda najmniej znaczącego bitu na tekście v1</h1>
-<div class="row">
-  <app-image-upload (imageChange)="onNextImage($event)" />
-  <app-image-download [image$]="newImage$" />
-</div>
-<div class="row">
-  <app-image-display [image$]="newImage$" />
-  <app-image-display [image$]="lsbImage$" />
-</div>
-<textarea
-  rows="5"
-  [value]="textContent"
-  [disabled]="textBound === 0"
-  (input)="onTextChange($event)"
-></textarea>
-{{ textContent.length }}/{{ textBound }}
+<h1>Etap 1: Metoda najmniej znaczącego bitu na tekście</h1>
+<app-tabber>
+    <app-tabber-tab name="7 bit">
+        <app-e1v1></app-e1v1>
+    </app-tabber-tab>
+    <app-tabber-tab name="8 bit">
+        <app-e1v2></app-e1v2>
+    </app-tabber-tab>
+</app-tabber>

@@ -6,13 +6,13 @@ import { vcIsMonochrome, vcMakeMask } from "steg";
 import { FormsModule } from "@angular/forms";
 
 @Component({
-  selector: "app-e5-merge",
+  selector: "app-e4-merge",
   standalone: true,
-  templateUrl: "./e5-merge.component.html",
-  styleUrl: "./e5-merge.component.css",
+  templateUrl: "./e4-merge.component.html",
+  styleUrl: "./e4-merge.component.css",
   imports: [FormsModule, ImageUploadComponent, ImageDisplayComponent],
 })
-export class E5MergeComponent {
+export class E4MergeComponent {
   private readonly leftSubject = new Subject<ImageData>();
   private readonly rightSubject = new Subject<ImageData>();
 

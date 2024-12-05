@@ -3,11 +3,11 @@ import { BehaviorSubject, combineLatest, map, Subject, switchMap } from 'rxjs';
 import { JPEGDecoder } from '../helpers/jpeg-decode';
 import { ImageDisplayComponent } from '../../../shared/image-display/image-display.component';
 import { ImageUploadComponent } from '../../../shared/image-upload/image-upload.component';
-import { SliderComponent } from '../../e4/slider/slider.component';
+import { SliderComponent } from '../../e3/slider/slider.component';
 import { AsyncPipe } from '@angular/common';
 
 @Component({
-  selector: 'app-e3-decode',
+  selector: 'app-e2-decode',
   standalone: true,
   imports: [
     ImageDisplayComponent,
@@ -15,10 +15,10 @@ import { AsyncPipe } from '@angular/common';
     SliderComponent,
     AsyncPipe
   ],
-  templateUrl: './e3-decode.component.html',
-  styleUrl: './e3-decode.component.css'
+  templateUrl: './e2-decode.component.html',
+  styleUrl: './e2-decode.component.css'
 })
-export class E3DecodeComponent {
+export class E2DecodeComponent {
   protected readonly textDecoder = new TextDecoder()
 
   protected readonly dataDensitySubject = new BehaviorSubject(1);
