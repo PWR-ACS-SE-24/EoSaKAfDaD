@@ -8,17 +8,16 @@ import { FormsModule } from "@angular/forms";
 import { computedOpt } from "../../../util/computed-opt";
 
 @Component({
-  selector: "app-e4-convert",
-  standalone: true,
-  templateUrl: "./e4-convert.component.html",
-  styleUrl: "./e4-convert.component.css",
-  imports: [
-    CommonModule,
-    FormsModule,
-    ImageDisplayComponent,
-    ImageUploadComponent,
-    ImageDownloadComponent,
-  ],
+    selector: "app-e4-convert",
+    templateUrl: "./e4-convert.component.html",
+    styleUrl: "./e4-convert.component.css",
+    imports: [
+        CommonModule,
+        FormsModule,
+        ImageDisplayComponent,
+        ImageUploadComponent,
+        ImageDownloadComponent,
+    ]
 })
 export class E4ConvertComponent {
   protected readonly grayscale = signal("luminosity");

@@ -8,17 +8,16 @@ import { toolScale, toolNoise, toolBrightness, toolContrast } from "steg";
 import { computedOpt } from "../../util/computed-opt";
 
 @Component({
-  selector: "app-e3",
-  standalone: true,
-  imports: [
-    CommonModule,
-    SliderComponent,
-    ImageDisplayComponent,
-    ImageUploadComponent,
-    ImageDownloadComponent,
-  ],
-  templateUrl: "./e3.component.html",
-  styleUrl: "./e3.component.css",
+    selector: "app-e3",
+    imports: [
+        CommonModule,
+        SliderComponent,
+        ImageDisplayComponent,
+        ImageUploadComponent,
+        ImageDownloadComponent,
+    ],
+    templateUrl: "./e3.component.html",
+    styleUrl: "./e3.component.css"
 })
 export class E3Component {
   protected readonly scale = signal(100);

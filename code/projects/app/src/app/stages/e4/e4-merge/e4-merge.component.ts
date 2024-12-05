@@ -6,11 +6,10 @@ import { vcIsMonochrome, vcMakeMask } from "steg";
 import { FormsModule } from "@angular/forms";
 
 @Component({
-  selector: "app-e4-merge",
-  standalone: true,
-  templateUrl: "./e4-merge.component.html",
-  styleUrl: "./e4-merge.component.css",
-  imports: [FormsModule, ImageUploadComponent, ImageDisplayComponent],
+    selector: "app-e4-merge",
+    templateUrl: "./e4-merge.component.html",
+    styleUrl: "./e4-merge.component.css",
+    imports: [FormsModule, ImageUploadComponent, ImageDisplayComponent]
 })
 export class E4MergeComponent {
   protected readonly leftInput = signal<ImageData | undefined>(undefined);

@@ -17,16 +17,15 @@ import { FileDownloadComponent } from "../../../shared/file-download/file-downlo
 import { toObservable, toSignal } from "@angular/core/rxjs-interop";
 
 @Component({
-  selector: "app-e2-encode",
-  standalone: true,
-  imports: [
-    ImageDisplayComponent,
-    ImageUploadComponent,
-    SliderComponent,
-    FileDownloadComponent,
-  ],
-  templateUrl: "./e2-encode.component.html",
-  styleUrl: "./e2-encode.component.css",
+    selector: "app-e2-encode",
+    imports: [
+        ImageDisplayComponent,
+        ImageUploadComponent,
+        SliderComponent,
+        FileDownloadComponent,
+    ],
+    templateUrl: "./e2-encode.component.html",
+    styleUrl: "./e2-encode.component.css"
 })
 export class E2EncodeComponent {
   protected readonly textEncoder = new TextEncoder();

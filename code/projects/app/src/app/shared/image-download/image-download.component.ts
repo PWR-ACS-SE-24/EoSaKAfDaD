@@ -1,4 +1,4 @@
-import { Component, effect, input, signal } from "@angular/core";
+import { Component, effect, input, signal, resource } from "@angular/core";
 import { dataUrl } from "../../util/image-data";
 
 type DownloadData = {
@@ -10,7 +10,6 @@ type DownloadData = {
 
 @Component({
   selector: "app-image-download",
-  standalone: true,
   imports: [],
   templateUrl: "./image-download.component.html",
   styleUrl: "./image-download.component.css",

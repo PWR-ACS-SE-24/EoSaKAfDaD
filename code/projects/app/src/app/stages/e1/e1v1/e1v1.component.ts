@@ -16,15 +16,14 @@ const ASCII_CHAR_BITS = 7;
 const RGB_CHANNELS = 3;
 
 @Component({
-  selector: "app-e1v1",
-  standalone: true,
-  imports: [
-    ImageUploadComponent,
-    ImageDisplayComponent,
-    ImageDownloadComponent,
-  ],
-  templateUrl: "./e1v1.component.html",
-  styleUrl: "./e1v1.component.css",
+    selector: "app-e1v1",
+    imports: [
+        ImageUploadComponent,
+        ImageDisplayComponent,
+        ImageDownloadComponent,
+    ],
+    templateUrl: "./e1v1.component.html",
+    styleUrl: "./e1v1.component.css"
 })
 export class E1V1Component {
   protected textContent = "";

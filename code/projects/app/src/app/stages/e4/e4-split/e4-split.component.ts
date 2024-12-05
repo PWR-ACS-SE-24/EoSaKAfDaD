@@ -5,15 +5,14 @@ import { ImageDisplayComponent } from "../../../shared/image-display/image-displ
 import { ImageDownloadComponent } from "../../../shared/image-download/image-download.component";
 
 @Component({
-  selector: "app-e4-split",
-  standalone: true,
-  templateUrl: "./e4-split.component.html",
-  styleUrl: "./e4-split.component.css",
-  imports: [
-    ImageUploadComponent,
-    ImageDisplayComponent,
-    ImageDownloadComponent,
-  ],
+    selector: "app-e4-split",
+    templateUrl: "./e4-split.component.html",
+    styleUrl: "./e4-split.component.css",
+    imports: [
+        ImageUploadComponent,
+        ImageDisplayComponent,
+        ImageDownloadComponent,
+    ]
 })
 export class E4SplitComponent {
   protected readonly image = signal<ImageData | undefined>(undefined);

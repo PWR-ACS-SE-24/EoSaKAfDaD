@@ -2,11 +2,10 @@ import { Component, effect, ElementRef, input, viewChild } from "@angular/core";
 import { drawOn } from "../../util/image-data";
 
 @Component({
-  selector: "app-image-display",
-  standalone: true,
-  imports: [],
-  templateUrl: "./image-display.component.html",
-  styleUrl: "./image-display.component.css",
+    selector: "app-image-display",
+    imports: [],
+    templateUrl: "./image-display.component.html",
+    styleUrl: "./image-display.component.css"
 })
 export class ImageDisplayComponent {
   public readonly image = input<ImageData>();

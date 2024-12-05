@@ -8,16 +8,15 @@ import { AsyncPipe } from "@angular/common";
 import { toObservable, toSignal } from "@angular/core/rxjs-interop";
 
 @Component({
-  selector: "app-e2-decode",
-  standalone: true,
-  imports: [
-    ImageDisplayComponent,
-    ImageUploadComponent,
-    SliderComponent,
-    AsyncPipe,
-  ],
-  templateUrl: "./e2-decode.component.html",
-  styleUrl: "./e2-decode.component.css",
+    selector: "app-e2-decode",
+    imports: [
+        ImageDisplayComponent,
+        ImageUploadComponent,
+        SliderComponent,
+        AsyncPipe,
+    ],
+    templateUrl: "./e2-decode.component.html",
+    styleUrl: "./e2-decode.component.css"
 })
 export class E2DecodeComponent {
   protected readonly textDecoder = new TextDecoder();

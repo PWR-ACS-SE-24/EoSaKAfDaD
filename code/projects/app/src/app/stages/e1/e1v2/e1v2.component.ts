@@ -13,15 +13,14 @@ import { lsbHighlight, lsb2extractText, lsb2embedText } from "steg";
 import { toSignal } from "@angular/core/rxjs-interop";
 
 @Component({
-  selector: "app-e1v2",
-  standalone: true,
-  imports: [
-    ImageUploadComponent,
-    ImageDisplayComponent,
-    ImageDownloadComponent,
-  ],
-  templateUrl: "./e1v2.component.html",
-  styleUrl: "./e1v2.component.css",
+    selector: "app-e1v2",
+    imports: [
+        ImageUploadComponent,
+        ImageDisplayComponent,
+        ImageDownloadComponent,
+    ],
+    templateUrl: "./e1v2.component.html",
+    styleUrl: "./e1v2.component.css"
 })
 export class E1V2Component {
   protected textContent = "";

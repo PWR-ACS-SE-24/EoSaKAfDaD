@@ -7,11 +7,10 @@ type Validator = {
 };
 
 @Component({
-  selector: "app-image-upload",
-  standalone: true,
-  imports: [],
-  templateUrl: "./image-upload.component.html",
-  styleUrl: "./image-upload.component.css",
+    selector: "app-image-upload",
+    imports: [],
+    templateUrl: "./image-upload.component.html",
+    styleUrl: "./image-upload.component.css"
 })
 export class ImageUploadComponent {
   @Output() public readonly imageChange = new EventEmitter<ImageData>();
