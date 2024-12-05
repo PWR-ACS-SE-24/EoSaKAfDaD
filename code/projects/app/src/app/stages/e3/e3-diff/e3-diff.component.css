@@ -1,0 +1,32 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 1fr;
+    grid-gap: 1rem;
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+button {
+    display: inline-flex;
+    margin: 1rem;
+    padding: 0.25rem 1rem;
+    border: 2px solid var(--app-gray);
+    border-radius: 0.5rem;
+    position: relative;
+    cursor: default;
+    user-select: none;
+}

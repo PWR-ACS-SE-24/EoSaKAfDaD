@@ -2,8 +2,8 @@
     <canvas #canvas></canvas>
     @if (showControls) {
         <div class="buttons">
-            <button>L</button>
-            <button>R</button>
+            <button (@flash.done)="clearState('left')" [@flash]="state['left']" (click)="addImage('left')">L</button>
+            <button (@flash.done)="clearState('right')" [@flash]="state['right']" (click)="addImage('right')">P</button>
         </div>
     }
 </div>
