@@ -1,21 +1,20 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from "@angular/core";
-import { Observable } from "rxjs";
+import { Component, effect, ElementRef, input, viewChild } from "@angular/core";
 import { drawOn } from "../../util/image-data";
 
 @Component({
   selector: "app-image-display",
-  standalone: true,
-  imports: [],
   templateUrl: "./image-display.component.html",
   styleUrl: "./image-display.component.css",
 })
-export class ImageDisplayComponent implements OnInit {
-  @Input({ required: true }) public image$!: Observable<ImageData>;
+export class ImageDisplayComponent {
+  public readonly image = input<ImageData>();
 
-  @ViewChild("canvas", { static: true })
-  protected readonly canvas!: ElementRef<HTMLCanvasElement>;
+  private readonly canvas =
+    viewChild.required<ElementRef<HTMLCanvasElement>>("canvas");
 
-  public ngOnInit(): void {
-    this.image$.subscribe((image) => drawOn(image, this.canvas.nativeElement));
+  public constructor() {
+    effect(() => {
+      drawOn(this.image(), this.canvas().nativeElement);
+    });
   }
 }

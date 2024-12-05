@@ -1,20 +1,20 @@
 <section>
   <app-image-upload
-    (imageChange)="onLeftUpload($event)"
+    (imageChange)="leftInput.set($event)"
     [validators]="uploadValidators"
   ></app-image-upload>
 </section>
 <section>
   <app-image-upload
-    (imageChange)="onRightUpload($event)"
+    (imageChange)="rightInput.set($event)"
     [validators]="uploadValidators"
   ></app-image-upload>
 </section>
 <section class="align-section">
   <div class="lower">
-    <app-image-display [image$]="left$"></app-image-display>
-    <div class="higher" [style.left]="offset + '%'">
-      <app-image-display [image$]="right$"></app-image-display>
+    <app-image-display [image]="leftMask()"></app-image-display>
+    <div class="higher" [style.left]="offset() + '%'">
+      <app-image-display [image]="rightMask()"></app-image-display>
     </div>
   </div>
   <input type="range" min="-80" max="80" step="2" [(ngModel)]="offset" />

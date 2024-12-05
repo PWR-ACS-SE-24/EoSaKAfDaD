@@ -1,32 +1,32 @@
 <div class="grid">
-    <section>
-        <app-image-display [image$]="imageSubject" />
-        <app-image-upload (imageChange)="onImageChange($event)"></app-image-upload>
-    </section>
-    <section>
-        <app-slider
-            label="Jakość"
-            [subject]="qualitySubject"
-            [min]="0"
-            [max]="100"
-            [step]="10"
-        ></app-slider>
-        <app-slider
-            label="Gęstość informacji"
-            [subject]="dataDensitySubject"
-            [min]="1"
-            [max]="31"
-            [step]="1"
-        ></app-slider>
-        <textarea
-            rows="5"
-            [value]="textContent"
-            [disabled]="textBound === 0"
-            (input)="onTextChange($event)"
-        ></textarea>
-    </section>
-    <section>
-        <app-image-display [image$]="newImage" />
-        <app-file-download [file$]="newFile"/>
-    </section>
+  <section>
+    <app-image-display [image]="image()" />
+    <app-image-upload (imageChange)="this.image.set($event)"></app-image-upload>
+  </section>
+  <section>
+    <app-slider
+      label="Jakość"
+      [(value)]="quality"
+      [min]="0"
+      [max]="100"
+      [step]="10"
+    ></app-slider>
+    <app-slider
+      label="Gęstość informacji"
+      [(value)]="dataDensity"
+      [min]="1"
+      [max]="31"
+      [step]="1"
+    ></app-slider>
+    <textarea
+      rows="5"
+      [value]="textContent()"
+      [disabled]="textBound() === 0"
+      (input)="onTextChange($event)"
+    ></textarea>
+  </section>
+  <section>
+    <app-image-display [image]="newImage()" />
+    <app-file-download [file]="newFile()" />
+  </section>
 </div>
