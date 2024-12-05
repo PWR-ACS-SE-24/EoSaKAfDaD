@@ -7,10 +7,10 @@ import { ImageUploadComponent } from "../../../shared/image-upload/image-upload.
 import { ImageDownloadComponent } from "../../../shared/image-download/image-download.component";
 
 @Component({
-  selector: "app-e5-convert",
+  selector: "app-e4-convert",
   standalone: true,
-  templateUrl: "./e5-convert.component.html",
-  styleUrl: "./e5-convert.component.css",
+  templateUrl: "./e4-convert.component.html",
+  styleUrl: "./e4-convert.component.css",
   imports: [
     CommonModule,
     ImageDisplayComponent,
@@ -18,7 +18,7 @@ import { ImageDownloadComponent } from "../../../shared/image-download/image-dow
     ImageDownloadComponent,
   ],
 })
-export class E5ConvertComponent {
+export class E4ConvertComponent {
   protected readonly grayscaleSubject = new BehaviorSubject("luminosity");
   protected readonly ditheringSubject = new BehaviorSubject("floyd-steinberg");
 
