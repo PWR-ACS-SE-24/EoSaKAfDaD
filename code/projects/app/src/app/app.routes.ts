@@ -15,7 +15,7 @@ export const stageRoutes: Routes = [
   },
   {
     path: "e3",
-    title: "E3 (edytor)",
+    title: "E3 (analiza)",
     loadComponent: () =>
       import("./stages/e3/e3.component").then((m) => m.E3Component),
   },

@@ -1,0 +1,27 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  
+  .grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr;
+    grid-gap: 1rem;
+  }
+  
+  section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .arrow {
+    font-size: 3rem;
+    font-weight: bold;
+  }
+  
