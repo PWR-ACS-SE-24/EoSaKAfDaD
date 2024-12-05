@@ -6,10 +6,10 @@ import {
   map,
   Subject,
 } from "rxjs";
-import { ImageUploadComponent } from "../../../shared/image-upload/image-upload.component";
+import { lsb1embedText, lsb1extractText, lsbHighlight } from "steg";
 import { ImageDisplayComponent } from "../../../shared/image-display/image-display.component";
 import { ImageDownloadComponent } from "../../../shared/image-download/image-download.component";
-import { lsbHighlight, lsb1embedText, lsb1extractText } from "steg";
+import { ImageUploadComponent } from "../../../shared/image-upload/image-upload.component";
 
 const ASCII_CHAR_BITS = 7;
 const RGB_CHANNELS = 3;
@@ -42,7 +42,7 @@ export class E1V1Component {
     this.textContent = lsb1extractText(image);
     this.textSubject.next(this.textContent);
     this.textBound = Math.floor(
-      (image.width * image.height * RGB_CHANNELS) / ASCII_CHAR_BITS
+      (image.width * image.height * RGB_CHANNELS) / ASCII_CHAR_BITS,
     );
   }
 

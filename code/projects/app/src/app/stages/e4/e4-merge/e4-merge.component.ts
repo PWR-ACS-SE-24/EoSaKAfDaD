@@ -1,9 +1,9 @@
 import { Component } from "@angular/core";
-import { map, Subject } from "rxjs";
-import { ImageUploadComponent } from "../../../shared/image-upload/image-upload.component";
-import { ImageDisplayComponent } from "../../../shared/image-display/image-display.component";
-import { vcIsMonochrome, vcMakeMask } from "steg";
 import { FormsModule } from "@angular/forms";
+import { map, Subject } from "rxjs";
+import { vcIsMonochrome, vcMakeMask } from "steg";
+import { ImageDisplayComponent } from "../../../shared/image-display/image-display.component";
+import { ImageUploadComponent } from "../../../shared/image-upload/image-upload.component";
 
 @Component({
   selector: "app-e4-merge",

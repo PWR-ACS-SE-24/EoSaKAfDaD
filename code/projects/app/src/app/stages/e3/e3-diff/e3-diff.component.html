@@ -1,16 +1,37 @@
 <div class="grid">
-    <section>
-        <app-image-display [image$]="left$" [showButtons]="false"></app-image-display>
-    </section>
-    <section>
-        <app-image-display [image$]="right$" [showButtons]="false"></app-image-display>
-    </section>
-    <section>
-        <app-slider label="Kontrast" [subject]="contrastSubject" [min]="-200" [max]="200" [step]="1"></app-slider>
-        <app-slider label="Jasność" [subject]="brighnessSubject" [min]="-200" [max]="200" [step]="1"></app-slider>
-        <app-image-download [image$]="image$"></app-image-download>
-    </section>
-    <section>
-        <app-image-display [image$]="image$" [showButtons]="false"></app-image-display>
-    </section>
+  <section>
+    <app-image-display
+      [image$]="left$"
+      [showButtons]="false"
+    ></app-image-display>
+  </section>
+  <section>
+    <app-image-display
+      [image$]="right$"
+      [showButtons]="false"
+    ></app-image-display>
+  </section>
+  <section>
+    <app-slider
+      label="Kontrast"
+      [subject]="contrastSubject"
+      [min]="-200"
+      [max]="200"
+      [step]="1"
+    ></app-slider>
+    <app-slider
+      label="Jasność"
+      [subject]="brighnessSubject"
+      [min]="-200"
+      [max]="200"
+      [step]="1"
+    ></app-slider>
+    <app-image-download [image$]="image$"></app-image-download>
+  </section>
+  <section>
+    <app-image-display
+      [image$]="image$"
+      [showButtons]="false"
+    ></app-image-display>
+  </section>
 </div>

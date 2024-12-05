@@ -1,9 +1,9 @@
 import { Component } from "@angular/core";
 import { map, share, Subject } from "rxjs";
 import { vcIsMonochrome, vcSplit } from "steg";
-import { ImageUploadComponent } from "../../../shared/image-upload/image-upload.component";
 import { ImageDisplayComponent } from "../../../shared/image-display/image-display.component";
 import { ImageDownloadComponent } from "../../../shared/image-download/image-download.component";
+import { ImageUploadComponent } from "../../../shared/image-upload/image-upload.component";
 
 @Component({
   selector: "app-e4-split",
@@ -21,7 +21,7 @@ export class E4SplitComponent {
   protected readonly image$ = this.imageSubject.asObservable();
   protected readonly layers$ = this.image$.pipe(
     map((image) => vcSplit(image, Date.now())),
-    share()
+    share(),
   );
   protected readonly left$ = this.layers$.pipe(map((l) => l[0]));
   protected readonly right$ = this.layers$.pipe(map((l) => l[1]));

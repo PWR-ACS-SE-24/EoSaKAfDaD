@@ -1,11 +1,11 @@
-import { Component } from "@angular/core";
 import { CommonModule } from "@angular/common";
+import { Component } from "@angular/core";
 import { BehaviorSubject, combineLatestWith, map, share, Subject } from "rxjs";
+import { toolBrightness, toolContrast, toolNoise, toolScale } from "steg";
 import { ImageDisplayComponent } from "../../../shared/image-display/image-display.component";
-import { ImageUploadComponent } from "../../../shared/image-upload/image-upload.component";
 import { ImageDownloadComponent } from "../../../shared/image-download/image-download.component";
+import { ImageUploadComponent } from "../../../shared/image-upload/image-upload.component";
 import { SliderComponent } from "./../slider/slider.component";
-import { toolScale, toolNoise, toolBrightness, toolContrast } from "steg";
 
 @Component({
   selector: "app-e3-editor",
@@ -37,7 +37,7 @@ export class E3EditorComponent {
     map(([i, brightness]) => toolBrightness(i, brightness)),
     combineLatestWith(this.contrastSubject),
     map(([i, contrast]) => toolContrast(i, contrast)),
-    share()
+    share(),
   );
 
   protected dimensions(image: ImageData | null): string | null {

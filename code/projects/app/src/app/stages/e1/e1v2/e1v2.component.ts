@@ -6,10 +6,10 @@ import {
   map,
   Subject,
 } from "rxjs";
-import { ImageUploadComponent } from "../../../shared/image-upload/image-upload.component";
+import { lsb2embedText, lsb2extractText, lsbHighlight } from "steg";
 import { ImageDisplayComponent } from "../../../shared/image-display/image-display.component";
 import { ImageDownloadComponent } from "../../../shared/image-download/image-download.component";
-import { lsbHighlight, lsb2extractText, lsb2embedText } from "steg";
+import { ImageUploadComponent } from "../../../shared/image-upload/image-upload.component";
 
 @Component({
   selector: "app-e1v2",

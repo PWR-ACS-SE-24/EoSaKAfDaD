@@ -1,10 +1,10 @@
-import { Component } from "@angular/core";
 import { CommonModule } from "@angular/common";
+import { Component } from "@angular/core";
 import { BehaviorSubject, combineLatestWith, map, Subject } from "rxjs";
 import { vcMakeMonochrome } from "steg";
 import { ImageDisplayComponent } from "../../../shared/image-display/image-display.component";
-import { ImageUploadComponent } from "../../../shared/image-upload/image-upload.component";
 import { ImageDownloadComponent } from "../../../shared/image-download/image-download.component";
+import { ImageUploadComponent } from "../../../shared/image-upload/image-upload.component";
 
 @Component({
   selector: "app-e4-convert",
@@ -27,8 +27,8 @@ export class E4ConvertComponent {
   protected readonly newImage$ = this.oldImage$.pipe(
     combineLatestWith(this.grayscaleSubject, this.ditheringSubject),
     map(([image, grayscale, dithering]) =>
-      vcMakeMonochrome(image, grayscale, dithering)
-    )
+      vcMakeMonochrome(image, grayscale, dithering),
+    ),
   );
 
   protected onImageUpload(image: ImageData): void {
