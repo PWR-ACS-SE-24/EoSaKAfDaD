@@ -1,15 +1,16 @@
-import { AsyncPipe } from "@angular/common";
-import { Component, Input } from "@angular/core";
-import { Observable } from "rxjs";
-import { DownloadPipe } from "./download.pipe";
+import { Component, input } from "@angular/core";
+import { computedOpt } from "../../util/computed-opt";
 
 @Component({
   selector: "app-file-download",
   standalone: true,
-  imports: [AsyncPipe, DownloadPipe],
   templateUrl: "./file-download.component.html",
   styleUrl: "./file-download.component.css",
 })
 export class FileDownloadComponent {
-  @Input({ required: true }) public file$!: Observable<File>;
+  public readonly file = input<File>();
+  protected readonly download = computedOpt(this.file, (f) => ({
+    fileName: f.name,
+    path: URL.createObjectURL(f),
+  }));
 }

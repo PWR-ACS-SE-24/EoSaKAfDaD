@@ -1,22 +1,25 @@
 <div class="grid">
-    <section>
-        <app-image-display [image$]="imageSubject" />
-        <app-image-upload (imageChange)="imageSubject.next($event)" (fileChange)="fileSubject.next($event)"></app-image-upload>
-    </section>
-    <section>
-        <app-slider
-            label="Gęstość informacji"
-            [subject]="dataDensitySubject"
-            [min]="1"
-            [max]="31"
-            [step]="1"
-        ></app-slider>
-    </section>
-    <section>
-        <textarea
-            rows="5"
-            [value]="textSubject | async"
-            [disabled]="true"
+  <section>
+    <app-image-display [image]="image()" />
+    <app-image-upload
+      (imageChange)="imageSubject.next($event)"
+      (fileChange)="fileSubject.next($event)"
+    ></app-image-upload>
+  </section>
+  <section>
+    <app-slider
+      label="Gęstość informacji"
+      [(value)]="dataDensity"
+      [min]="1"
+      [max]="31"
+      [step]="1"
+    ></app-slider>
+  </section>
+  <section>
+    <textarea
+      rows="5"
+      [value]="textSubject | async"
+      [disabled]="true"
     ></textarea>
-    </section>
+  </section>
 </div>

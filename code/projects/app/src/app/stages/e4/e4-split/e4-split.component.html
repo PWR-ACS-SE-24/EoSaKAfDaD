@@ -1,14 +1,14 @@
 <section class="upload-section">
   <app-image-upload
-    (imageChange)="onImageUpload($event)"
+    (imageChange)="image.set($event)"
     [validators]="uploadValidators"
   ></app-image-upload>
 </section>
 <section>
-  <app-image-display [image$]="left$"></app-image-display>
-  <app-image-download [image$]="left$"></app-image-download>
+  <app-image-display [image]="layers()[0]"></app-image-display>
+  <app-image-download [image]="layers()[0]"></app-image-download>
 </section>
 <section>
-  <app-image-display [image$]="right$"></app-image-display>
-  <app-image-download [image$]="right$"></app-image-download>
+  <app-image-display [image]="layers()[1]"></app-image-display>
+  <app-image-download [image]="layers()[1]"></app-image-download>
 </section>

@@ -10,6 +10,7 @@ import { ImageUploadComponent } from "../../../shared/image-upload/image-upload.
 import { ImageDisplayComponent } from "../../../shared/image-display/image-display.component";
 import { ImageDownloadComponent } from "../../../shared/image-download/image-download.component";
 import { lsbHighlight, lsb2extractText, lsb2embedText } from "steg";
+import { toSignal } from "@angular/core/rxjs-interop";
 
 @Component({
   selector: "app-e1v2",
@@ -32,6 +33,10 @@ export class E1V2Component {
     this.textSubject.pipe(debounceTime(100), distinctUntilChanged()),
   ]).pipe(map(([image, text]) => lsb2embedText(image, text)));
   protected readonly lsbImage$ = this.newImage$.pipe(map(lsbHighlight));
+
+  protected readonly image = toSignal(this.imageSubject);
+  protected readonly newImage = toSignal(this.newImage$);
+  protected readonly lsbImage = toSignal(this.lsbImage$);
 
   protected onNextImage(image: ImageData): void {
     this.imageSubject.next(image);

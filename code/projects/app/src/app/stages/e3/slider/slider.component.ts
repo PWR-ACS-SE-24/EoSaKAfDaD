@@ -1,22 +1,18 @@
 import { CommonModule } from "@angular/common";
-import { Component, Input } from "@angular/core";
-import { Subject } from "rxjs";
+import { Component, input, model } from "@angular/core";
+import { FormsModule } from "@angular/forms";
 
 @Component({
   selector: "app-slider",
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: "./slider.component.html",
   styleUrl: "./slider.component.css",
 })
 export class SliderComponent {
-  @Input({ required: true }) label!: string;
-  @Input({ required: true }) subject!: Subject<number>;
-  @Input({ required: true }) min!: number;
-  @Input({ required: true }) max!: number;
-  @Input() step: number = 1;
-
-  protected int(text: string): number {
-    return parseInt(text, 10);
-  }
+  public readonly value = model<number>();
+  public readonly label = input.required<string>();
+  public readonly min = input.required<number>();
+  public readonly max = input.required<number>();
+  public readonly step = input(1);
 }

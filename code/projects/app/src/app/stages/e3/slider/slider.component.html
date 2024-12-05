@@ -1,12 +1,10 @@
 <label>
-  {{ label }} <br />
+  {{ label() }} <br />
   <input
-    #input
     type="range"
-    [min]="min"
-    [max]="max"
-    [step]="step"
-    [value]="subject | async"
-    (change)="subject.next(int(input.value))"
+    [min]="min()"
+    [max]="max()"
+    [step]="step()"
+    [(ngModel)]="value"
   />
 </label>

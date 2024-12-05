@@ -1,7 +1,7 @@
-@if (file$ | download | async; as file) {
-  <div class="wrapper">
-    <a [href]="file.path" [download]="file.fileName">Pobierz</a>
-  </div>
+@if (download(); as d) {
+<div class="wrapper">
+  <a [href]="d.path" [download]="d.fileName">Pobierz</a>
+</div>
 } @else {
-  <div class="wrapper" aria-disabled>Pobierz</div>
+<div class="wrapper" aria-disabled>Pobierz</div>
 }

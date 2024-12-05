@@ -1,10 +1,10 @@
 <div class="row">
   <app-image-upload (imageChange)="onNextImage($event)" />
-  <app-image-download [image$]="newImage$" />
+  <app-image-download [image]="newImage()" />
 </div>
 <div class="row">
-  <app-image-display [image$]="newImage$" />
-  <app-image-display [image$]="lsbImage$" />
+  <app-image-display [image]="newImage()" />
+  <app-image-display [image]="lsbImage()" />
 </div>
 <textarea
   rows="5"

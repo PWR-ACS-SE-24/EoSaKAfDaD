@@ -1,5 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
-import { Observable } from "rxjs";
+import { Component, effect, input, signal } from "@angular/core";
 import { dataUrl } from "../../util/image-data";
 
 type DownloadData = {
@@ -16,13 +15,15 @@ type DownloadData = {
   templateUrl: "./image-download.component.html",
   styleUrl: "./image-download.component.css",
 })
-export class ImageDownloadComponent implements OnInit {
-  @Input({ required: true }) public image$!: Observable<ImageData>;
+export class ImageDownloadComponent {
+  public readonly image = input<ImageData>();
+  protected readonly data = signal<DownloadData | undefined>(undefined);
 
-  protected data: DownloadData = null;
+  public constructor() {
+    effect(() => {
+      const image = this.image();
+      if (!image) return;
 
-  public ngOnInit(): void {
-    this.image$.subscribe((image) => {
       crypto.subtle.digest("SHA-1", image.data).then((hash) => {
         const fileHash = Array.from(new Uint8Array(hash))
           .map((b) => b.toString(16).padStart(2, "0"))
@@ -31,7 +32,7 @@ export class ImageDownloadComponent implements OnInit {
         const pathPng = dataUrl(image, "image/png");
         const pathJpeg = dataUrl(image, "image/jpeg");
         const pathWebp = dataUrl(image, "image/webp");
-        this.data = { fileHash, pathPng, pathJpeg, pathWebp };
+        this.data.set({ fileHash, pathPng, pathJpeg, pathWebp });
       });
     });
   }

@@ -1,26 +1,18 @@
 <section>
-  <app-image-display [image$]="oldImage$"></app-image-display>
-  <app-image-upload (imageChange)="onImageUpload($event)"></app-image-upload>
+  <app-image-display [image]="image()"></app-image-display>
+  <app-image-upload (imageChange)="image.set($event)"></app-image-upload>
 </section>
 <section>
   <label>
     Szarość <br />
-    <select
-      #grayscaleSelect
-      [value]="grayscaleSubject | async"
-      (change)="grayscaleSubject.next(grayscaleSelect.value)"
-    >
+    <select [(ngModel)]="grayscale">
       <option value="average">Średnia</option>
       <option value="luminosity">Jasność</option>
     </select>
   </label>
   <label>
     Dithering <br />
-    <select
-      #ditheringSelect
-      [value]="ditheringSubject | async"
-      (change)="ditheringSubject.next(ditheringSelect.value)"
-    >
+    <select [(ngModel)]="dithering">
       <option value="threshold">Próg</option>
       <option value="random">Losowy</option>
       <option value="floyd-steinberg">Floyd-Steinberg</option>
@@ -29,6 +21,6 @@
   <div class="arrow">➜</div>
 </section>
 <section>
-  <app-image-display [image$]="newImage$"></app-image-display>
-  <app-image-download [image$]="newImage$"></app-image-download>
+  <app-image-display [image]="newImage()"></app-image-display>
+  <app-image-download [image]="newImage()"></app-image-download>
 </section>

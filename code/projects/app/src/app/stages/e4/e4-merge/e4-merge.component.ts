@@ -1,5 +1,5 @@
-import { Component } from "@angular/core";
-import { map, Subject } from "rxjs";
+import { Component, computed, signal } from "@angular/core";
+import { map } from "rxjs";
 import { ImageUploadComponent } from "../../../shared/image-upload/image-upload.component";
 import { ImageDisplayComponent } from "../../../shared/image-display/image-display.component";
 import { vcIsMonochrome, vcMakeMask } from "steg";
@@ -13,15 +13,18 @@ import { FormsModule } from "@angular/forms";
   imports: [FormsModule, ImageUploadComponent, ImageDisplayComponent],
 })
 export class E4MergeComponent {
-  private readonly leftSubject = new Subject<ImageData>();
-  private readonly rightSubject = new Subject<ImageData>();
+  protected readonly leftInput = signal<ImageData | undefined>(undefined);
+  protected readonly rightInput = signal<ImageData | undefined>(undefined);
+  protected readonly offset = signal(0);
 
-  protected readonly left$ = this.leftSubject
-    .asObservable()
-    .pipe(map(vcMakeMask));
-  protected readonly right$ = this.rightSubject
-    .asObservable()
-    .pipe(map(vcMakeMask));
+  protected readonly leftMask = computed(() => {
+    const image = this.leftInput();
+    return image ? vcMakeMask(image) : undefined;
+  });
+  protected readonly rightMask = computed(() => {
+    const image = this.rightInput();
+    return image ? vcMakeMask(image) : undefined;
+  });
 
   protected readonly uploadValidators = [
     {
@@ -29,14 +32,4 @@ export class E4MergeComponent {
       message: "Obraz musi być monochromatyczny!",
     },
   ];
-
-  protected offset = 0;
-
-  protected onLeftUpload(image: ImageData): void {
-    this.leftSubject.next(image);
-  }
-
-  protected onRightUpload(image: ImageData): void {
-    this.rightSubject.next(image);
-  }
 }

@@ -10,6 +10,7 @@ import { ImageUploadComponent } from "../../../shared/image-upload/image-upload.
 import { ImageDisplayComponent } from "../../../shared/image-display/image-display.component";
 import { ImageDownloadComponent } from "../../../shared/image-download/image-download.component";
 import { lsbHighlight, lsb1embedText, lsb1extractText } from "steg";
+import { toSignal } from "@angular/core/rxjs-interop";
 
 const ASCII_CHAR_BITS = 7;
 const RGB_CHANNELS = 3;
@@ -35,6 +36,9 @@ export class E1V1Component {
     this.textSubject.pipe(debounceTime(100), distinctUntilChanged()),
   ]).pipe(map(([image, text]) => lsb1embedText(image, text)));
   protected readonly lsbImage$ = this.newImage$.pipe(map(lsbHighlight));
+
+  protected readonly newImage = toSignal(this.newImage$);
+  protected readonly lsbImage = toSignal(this.lsbImage$);
 
   protected onNextImage(image: ImageData): void {
     this.imageSubject.next(image);
