@@ -15,7 +15,12 @@ export class ImageDisplayComponent implements OnInit {
   @ViewChild("canvas", { static: true })
   protected readonly canvas!: ElementRef<HTMLCanvasElement>;
 
+  showControls = false;
+
   public ngOnInit(): void {
-    this.image$.subscribe((image) => drawOn(image, this.canvas.nativeElement));
+    this.image$.subscribe((image) => {
+      drawOn(image, this.canvas.nativeElement)
+      this.showControls = true;
+    });
   }
 }

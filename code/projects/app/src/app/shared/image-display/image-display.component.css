@@ -3,3 +3,21 @@ canvas {
   width: 100%;
   height: auto;
 }
+
+.buttons {
+  margin-top: 0;
+  display: flex;
+  gap: 0.1rem;
+  justify-content: end;
+  border-top: 2px solid var(--app-black);
+}
+
+.buttons > button {
+  padding: 0 1rem;
+  margin-left: 1rem;
+  background-color: var(--app-navy);
+  color: var(--app-white);
+  border: 2px solid var(--app-navy);
+  border-top: none;
+  border-radius: 0 0 0.5rem 0.5rem;
+}

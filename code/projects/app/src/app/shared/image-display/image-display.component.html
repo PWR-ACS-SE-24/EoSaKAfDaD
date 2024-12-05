@@ -1,1 +1,9 @@
-<canvas #canvas></canvas>
+<div class="wrapper">
+    <canvas #canvas></canvas>
+    @if (showControls) {
+        <div class="buttons">
+            <button>L</button>
+            <button>R</button>
+        </div>
+    }
+</div>
