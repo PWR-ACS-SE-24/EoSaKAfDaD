@@ -3,7 +3,7 @@ import { Routes } from "@angular/router";
 export const stageRoutes: Routes = [
   {
     path: "e1",
-    title: "E1 (LSB v1)",
+    title: "E1 (LSB)",
     loadComponent: () =>
       import("./stages/e1/e1.component").then((m) => m.E1Component),
   },

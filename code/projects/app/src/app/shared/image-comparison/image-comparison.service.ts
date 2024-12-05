@@ -44,13 +44,6 @@ export class ImageComparisonService {
   }
 
   public clear(which: "left" | "right") {
-    switch (which) {
-      case "left":
-        this.left.next(null);
-        break;
-      case "right":
-        this.right.next(null);
-        break;
-    }
+    this[which].next(null);
   }
 }
