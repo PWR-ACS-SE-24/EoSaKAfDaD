@@ -3,7 +3,6 @@ import { computedOpt } from "../../util/computed-opt";
 
 @Component({
   selector: "app-file-download",
-  standalone: true,
   templateUrl: "./file-download.component.html",
   styleUrl: "./file-download.component.css",
 })

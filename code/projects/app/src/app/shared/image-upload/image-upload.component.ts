@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { Component, input, output } from "@angular/core";
 import { fromFile } from "../../util/image-data";
 
 type Validator = {
@@ -7,15 +7,14 @@ type Validator = {
 };
 
 @Component({
-    selector: "app-image-upload",
-    imports: [],
-    templateUrl: "./image-upload.component.html",
-    styleUrl: "./image-upload.component.css"
+  selector: "app-image-upload",
+  templateUrl: "./image-upload.component.html",
+  styleUrl: "./image-upload.component.css",
 })
 export class ImageUploadComponent {
-  @Output() public readonly imageChange = new EventEmitter<ImageData>();
-  @Input() public validators: Validator[] = [];
-  @Output() public readonly fileChange = new EventEmitter<File>();
+  public readonly validators = input<Validator[]>([]);
+  public readonly imageChange = output<ImageData>();
+  public readonly fileChange = output<File>();
 
   protected readonly inputId = crypto.randomUUID();
   protected readonly supportedMimeTypes = [
@@ -75,7 +74,7 @@ export class ImageUploadComponent {
       }
 
       fromFile(file).then((image) => {
-        for (const validator of this.validators) {
+        for (const validator of this.validators()) {
           if (!validator.validate(image)) {
             this.flash("red");
             alert(validator.message);

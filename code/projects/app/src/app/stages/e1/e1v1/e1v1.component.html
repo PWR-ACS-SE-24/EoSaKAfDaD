@@ -8,8 +8,8 @@
 </div>
 <textarea
   rows="5"
-  [value]="textContent"
-  [disabled]="textBound === 0"
+  [value]="textContent()"
+  [disabled]="textBound() === 0"
   (input)="onTextChange($event)"
 ></textarea>
-{{ textContent.length }}/{{ textBound }}
+{{ textContent().length }}/{{ textBound() }}

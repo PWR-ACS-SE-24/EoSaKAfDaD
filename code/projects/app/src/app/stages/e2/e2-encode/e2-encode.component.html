@@ -1,7 +1,7 @@
 <div class="grid">
   <section>
     <app-image-display [image]="image()" />
-    <app-image-upload (imageChange)="onImageChange($event)"></app-image-upload>
+    <app-image-upload (imageChange)="this.image.set($event)"></app-image-upload>
   </section>
   <section>
     <app-slider
@@ -20,13 +20,13 @@
     ></app-slider>
     <textarea
       rows="5"
-      [value]="textContent"
-      [disabled]="textBound === 0"
+      [value]="textContent()"
+      [disabled]="textBound() === 0"
       (input)="onTextChange($event)"
     ></textarea>
   </section>
   <section>
     <app-image-display [image]="newImage()" />
-    <app-file-download [file$]="newFile$" />
+    <app-file-download [file]="newFile()" />
   </section>
 </div>

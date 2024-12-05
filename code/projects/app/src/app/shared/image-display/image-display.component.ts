@@ -2,23 +2,19 @@ import { Component, effect, ElementRef, input, viewChild } from "@angular/core";
 import { drawOn } from "../../util/image-data";
 
 @Component({
-    selector: "app-image-display",
-    imports: [],
-    templateUrl: "./image-display.component.html",
-    styleUrl: "./image-display.component.css"
+  selector: "app-image-display",
+  templateUrl: "./image-display.component.html",
+  styleUrl: "./image-display.component.css",
 })
 export class ImageDisplayComponent {
   public readonly image = input<ImageData>();
 
-  protected readonly canvas =
+  private readonly canvas =
     viewChild.required<ElementRef<HTMLCanvasElement>>("canvas");
 
   public constructor() {
     effect(() => {
-      const image = this.image();
-      if (image) {
-        drawOn(image, this.canvas().nativeElement);
-      }
+      drawOn(this.image(), this.canvas().nativeElement);
     });
   }
 }

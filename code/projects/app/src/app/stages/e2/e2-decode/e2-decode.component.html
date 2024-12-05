@@ -2,8 +2,8 @@
   <section>
     <app-image-display [image]="image()" />
     <app-image-upload
-      (imageChange)="imageSubject.next($event)"
-      (fileChange)="fileSubject.next($event)"
+      (imageChange)="image.set($event)"
+      (fileChange)="file.set($event)"
     ></app-image-upload>
   </section>
   <section>
@@ -16,10 +16,6 @@
     ></app-slider>
   </section>
   <section>
-    <textarea
-      rows="5"
-      [value]="textSubject | async"
-      [disabled]="true"
-    ></textarea>
+    <textarea rows="5" [value]="textContent()" [disabled]="true"></textarea>
   </section>
 </div>
