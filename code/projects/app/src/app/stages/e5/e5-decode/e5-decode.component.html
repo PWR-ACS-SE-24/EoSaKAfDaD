@@ -1,0 +1,19 @@
+<div class="grid">
+  <section>
+    <app-image-display [image]="image()" />
+    <app-image-upload
+      (imageChange)="image.set($event)"
+      (fileChange)="file.set($event)"
+    ></app-image-upload>
+  </section>
+  <section>
+    <textarea
+      rows="1"
+      [disabled]="textKey() === 0"
+      (input)="onKeyChange($event)"
+    ></textarea>
+  </section>
+  <section>
+    <textarea rows="5" [value]="textContent()" [disabled]="true"></textarea>
+  </section>
+</div>

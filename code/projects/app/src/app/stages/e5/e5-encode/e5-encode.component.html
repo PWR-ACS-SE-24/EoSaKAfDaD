@@ -1,0 +1,22 @@
+<div class="grid">
+  <section>
+    <app-image-display [image]="image()" />
+    <app-image-upload (imageChange)="this.image.set($event)"></app-image-upload>
+  </section>
+  <section>
+    <textarea
+      rows="1"
+      [disabled]="image() === undefined"
+      (input)="onKeyChange($event)"
+    ></textarea>
+    <textarea
+      rows="5"
+      [disabled]="image() === undefined"
+      (input)="onTextChange($event)"
+    ></textarea>
+  </section>
+  <section>
+    <app-image-display [image]="newImage()" />
+    <app-file-download [file]="newFile()" />
+  </section>
+</div>
