@@ -1,15 +1,15 @@
-@if (data !== null) {
+@if (data(); as d) {
   <div class="wrapper">
     Pobierz
     <ul>
       <li>
-        <a [href]="data.pathPng" [download]="data.fileHash + '.png'">.png</a>
+        <a [href]="d.pathPng" [download]="d.fileHash + '.png'">.png</a>
       </li>
       <li>
-        <a [href]="data.pathJpeg" [download]="data.fileHash + '.jpg'">.jpg</a>
+        <a [href]="d.pathJpeg" [download]="d.fileHash + '.jpg'">.jpg</a>
       </li>
       <li>
-        <a [href]="data.pathWebp" [download]="data.fileHash + '.webp'">.webp</a>
+        <a [href]="d.pathWebp" [download]="d.fileHash + '.webp'">.webp</a>
       </li>
     </ul>
   </div>

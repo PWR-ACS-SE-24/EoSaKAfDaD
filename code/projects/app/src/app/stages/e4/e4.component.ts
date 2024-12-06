@@ -9,7 +9,6 @@ import { E4SplitComponent } from "./e4-split/e4-split.component";
 
 @Component({
   selector: "app-e4",
-  standalone: true,
   imports: [
     TabberComponent,
     TabberTabComponent,

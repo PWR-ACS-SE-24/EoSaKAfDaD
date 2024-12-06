@@ -1,56 +1,42 @@
-import { AsyncPipe } from "@angular/common";
-import { Component } from "@angular/core";
-import { BehaviorSubject, combineLatest, map, Subject, switchMap } from "rxjs";
+import { Component, effect, resource, signal } from "@angular/core";
 import { ImageDisplayComponent } from "../../../shared/image-display/image-display.component";
 import { ImageUploadComponent } from "../../../shared/image-upload/image-upload.component";
+import { computedOpt } from "../../../util/computed-opt";
 import { SliderComponent } from "../../e3/slider/slider.component";
 import { JPEGDecoder } from "../helpers/jpeg-decode";
 
 @Component({
   selector: "app-e2-decode",
-  standalone: true,
-  imports: [
-    ImageDisplayComponent,
-    ImageUploadComponent,
-    SliderComponent,
-    AsyncPipe,
-  ],
+  imports: [ImageDisplayComponent, ImageUploadComponent, SliderComponent],
   templateUrl: "./e2-decode.component.html",
   styleUrl: "./e2-decode.component.css",
 })
 export class E2DecodeComponent {
-  protected readonly textDecoder = new TextDecoder();
+  private readonly textDecoder = new TextDecoder();
 
-  protected readonly dataDensitySubject = new BehaviorSubject(1);
-  protected readonly imageSubject = new Subject<ImageData>();
-  protected readonly fileSubject = new Subject<File>();
-  protected readonly textSubject = combineLatest([
-    this.dataDensitySubject,
-    this.fileSubject.pipe(
-      switchMap((file) => file.arrayBuffer()),
-      map((buffer) => this.decodeImage(buffer)),
-    ),
-  ]).pipe(
-    map(([dataDensity, decoder]) =>
-      this.decodeTextFromDCT(decoder, dataDensity),
-    ),
+  protected readonly dataDensity = signal(1);
+
+  protected readonly image = signal<ImageData | undefined>(undefined);
+  protected readonly file = signal<File | undefined>(undefined);
+  protected readonly jpegDecoder = resource({
+    request: () => this.file(),
+    loader: async ({ request }) => {
+      const buffer = await request?.arrayBuffer();
+      return buffer ? this.decodeImage(buffer) : undefined;
+    },
+  }).value;
+  protected readonly textContent = computedOpt(this.jpegDecoder, (d) =>
+    this.decodeTextFromDCT(d, this.dataDensity()),
   );
 
-  protected decodeImage(file: ArrayBuffer) {
+  private decodeImage(file: ArrayBuffer) {
     const rawImage = new Uint8ClampedArray(file);
     const decoder = new JPEGDecoder(rawImage);
     decoder.parse();
     return decoder;
   }
 
-  protected onImageChange(image: ImageData) {
-    this.imageSubject.next(image);
-  }
-
-  protected decodeTextFromDCT(
-    decoder: JPEGDecoder,
-    dataDensity: number,
-  ): string {
+  private decodeTextFromDCT(decoder: JPEGDecoder, dataDensity: number): string {
     const data = Array.from(decoder.getDCTEmbeddedData(dataDensity));
     const characters = new Uint8Array(Math.ceil(data.length / 8));
     for (let i = 0; i < Math.ceil(data.length / 8); i += 1) {
@@ -58,7 +44,17 @@ export class E2DecodeComponent {
         .slice(i * 8, (i + 1) * 8)
         .reduce((acc, bit) => acc * 2 + bit, 0);
     }
-
     return this.textDecoder.decode(characters);
+  }
+
+  public constructor() {
+    effect(() => {
+      console.log({
+        image: this.image(),
+        file: this.file(),
+        jpegDecoder: this.jpegDecoder(),
+        textContent: this.textContent(),
+      });
+    });
   }
 }

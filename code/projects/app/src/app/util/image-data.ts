@@ -23,8 +23,15 @@ export function dataUrl(image: ImageData, type: string = "image/png"): string {
   return canvas.toDataURL(type);
 }
 
-export function drawOn(image: ImageData, canvas: HTMLCanvasElement): void {
-  canvas.width = image.width;
-  canvas.height = image.height;
-  canvas.getContext("2d")?.putImageData(image, 0, 0);
+export function drawOn(
+  image: ImageData | undefined,
+  canvas: HTMLCanvasElement,
+): void {
+  if (image) {
+    canvas.width = image.width;
+    canvas.height = image.height;
+    canvas.getContext("2d")?.putImageData(image, 0, 0);
+  } else {
+    canvas.getContext("2d")?.clearRect(0, 0, canvas.width, canvas.height);
+  }
 }

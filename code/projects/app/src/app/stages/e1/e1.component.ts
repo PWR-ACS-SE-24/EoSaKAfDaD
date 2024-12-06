@@ -8,7 +8,6 @@ import { E1V2Component } from "./e1v2/e1v2.component";
 
 @Component({
   selector: "app-e1",
-  standalone: true,
   imports: [TabberComponent, TabberTabComponent, E1V1Component, E1V2Component],
   templateUrl: "./e1.component.html",
   styleUrl: "./e1.component.css",

@@ -8,7 +8,6 @@ import { E2EncodeComponent } from "./e2-encode/e2-encode.component";
 
 @Component({
   selector: "app-e2",
-  standalone: true,
   imports: [
     TabberComponent,
     TabberTabComponent,

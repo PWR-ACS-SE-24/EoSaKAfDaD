@@ -5,8 +5,7 @@ import {
   transition,
   trigger,
 } from "@angular/animations";
-import { Component, ElementRef, Input, OnInit, ViewChild } from "@angular/core";
-import { Observable } from "rxjs";
+import { Component, effect, ElementRef, input, viewChild } from "@angular/core";
 import { drawOn } from "../../util/image-data";
 import { ImageComparisonService } from "../image-comparison/image-comparison.service";
 
@@ -14,8 +13,6 @@ type Flash = "red" | "green" | "default";
 
 @Component({
   selector: "app-image-display",
-  standalone: true,
-  imports: [],
   templateUrl: "./image-display.component.html",
   styleUrl: "./image-display.component.css",
   animations: [
@@ -30,25 +27,22 @@ type Flash = "red" | "green" | "default";
     ]),
   ],
 })
-export class ImageDisplayComponent implements OnInit {
-  @Input({ required: true }) public image$!: Observable<ImageData>;
-  @Input() public showButtons = true;
+export class ImageDisplayComponent {
+  public readonly image = input<ImageData>();
+  protected showButtons = input<boolean>(false);
 
-  @ViewChild("canvas", { static: true })
-  protected readonly canvas!: ElementRef<HTMLCanvasElement>;
+  private readonly canvas =
+    viewChild.required<ElementRef<HTMLCanvasElement>>("canvas");
 
   protected showControls = false;
   private currentImage: ImageData | null = null;
 
   protected state = { left: "default" as Flash, right: "default" as Flash };
 
-  constructor(private readonly imageLocalStorage: ImageComparisonService) {}
-
-  public ngOnInit(): void {
-    this.image$.subscribe((image) => {
-      drawOn(image, this.canvas.nativeElement);
-      this.showControls = this.showButtons;
-      this.currentImage = image;
+  constructor(private readonly imageLocalStorage: ImageComparisonService) {
+    effect(() => {
+      drawOn(this.image(), this.canvas().nativeElement);
+      this.showControls = this.showButtons();
     });
   }
 
