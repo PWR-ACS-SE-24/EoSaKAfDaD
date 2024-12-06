@@ -5,7 +5,14 @@ import {
   transition,
   trigger,
 } from "@angular/animations";
-import { Component, effect, ElementRef, input, viewChild } from "@angular/core";
+import {
+  Component,
+  effect,
+  ElementRef,
+  input,
+  signal,
+  viewChild,
+} from "@angular/core";
 import { drawOn } from "../../util/image-data";
 import { ImageComparisonService } from "../image-comparison/image-comparison.service";
 
@@ -29,20 +36,18 @@ type Flash = "red" | "green" | "default";
 })
 export class ImageDisplayComponent {
   public readonly image = input<ImageData>();
-  protected showButtons = input<boolean>(false);
+  public showButtons = input<boolean>(true);
+  protected showControls = signal(false);
 
   private readonly canvas =
     viewChild.required<ElementRef<HTMLCanvasElement>>("canvas");
-
-  protected showControls = false;
-  private currentImage: ImageData | null = null;
 
   protected state = { left: "default" as Flash, right: "default" as Flash };
 
   constructor(private readonly imageLocalStorage: ImageComparisonService) {
     effect(() => {
       drawOn(this.image(), this.canvas().nativeElement);
-      this.showControls = this.showButtons();
+      this.showControls.set(this.image() !== undefined && this.showButtons());
     });
   }
 
@@ -55,9 +60,10 @@ export class ImageDisplayComponent {
   }
 
   public addImage(which: "left" | "right") {
-    if (this.currentImage == null) return;
+    const image = this.image();
+    if (image === undefined) return;
     this.imageLocalStorage
-      .addImage(which, this.currentImage)
+      .addImage(which, image)
       .then((result) => this.flash(which, result ? "green" : "red"));
   }
 }

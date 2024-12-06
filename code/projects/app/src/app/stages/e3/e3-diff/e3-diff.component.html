@@ -1,36 +1,42 @@
 <div class="grid">
   <section>
     <app-image-display
-      [image$]="left$"
+      [image]="left()"
       [showButtons]="false"
     ></app-image-display>
+    <button [ariaDisabled]="left() === undefined" (click)="clearLeft()">
+      Usuń
+    </button>
   </section>
   <section>
     <app-image-display
-      [image$]="right$"
+      [image]="right()"
       [showButtons]="false"
     ></app-image-display>
+    <button [ariaDisabled]="right() === undefined" (click)="clearRight()">
+      Usuń
+    </button>
   </section>
   <section>
     <app-slider
       label="Kontrast"
-      [subject]="contrastSubject"
+      [(value)]="contrast"
       [min]="-200"
       [max]="200"
       [step]="1"
     ></app-slider>
     <app-slider
       label="Jasność"
-      [subject]="brighnessSubject"
+      [(value)]="brightness"
       [min]="-200"
       [max]="200"
       [step]="1"
     ></app-slider>
-    <app-image-download [image$]="image$"></app-image-download>
+    <app-image-download [image]="image()"></app-image-download>
   </section>
   <section>
     <app-image-display
-      [image$]="image$"
+      [image]="image()"
       [showButtons]="false"
     ></app-image-display>
   </section>

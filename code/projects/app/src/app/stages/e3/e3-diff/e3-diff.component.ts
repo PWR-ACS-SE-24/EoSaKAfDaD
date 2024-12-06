@@ -1,5 +1,4 @@
-import { Component } from "@angular/core";
-import { BehaviorSubject, combineLatest, map, Observable } from "rxjs";
+import { Component, computed, signal, Signal } from "@angular/core";
 import { toolDifference } from "steg";
 import { ImageComparisonService } from "../../../shared/image-comparison/image-comparison.service";
 import { ImageDisplayComponent } from "../../../shared/image-display/image-display.component";
@@ -14,30 +13,30 @@ import { SliderComponent } from "../slider/slider.component";
   styleUrl: "./e3-diff.component.css",
 })
 export class E3DiffComponent {
-  protected readonly contrastSubject = new BehaviorSubject(0);
-  protected readonly brighnessSubject = new BehaviorSubject(0);
+  protected readonly contrast = signal(0);
+  protected readonly brightness = signal(0);
 
-  protected readonly image$: Observable<ImageData>;
-  protected readonly left$: Observable<ImageData>;
-  protected readonly right$: Observable<ImageData>;
+  protected readonly image: Signal<ImageData | undefined>;
+  protected readonly left: Signal<ImageData | undefined>;
+  protected readonly right: Signal<ImageData | undefined>;
 
   constructor(private readonly imageLocalStorage: ImageComparisonService) {
-    this.left$ = this.imageLocalStorage.left$;
-    this.right$ = this.imageLocalStorage.right$;
+    this.left = this.imageLocalStorage.left;
+    this.right = this.imageLocalStorage.right;
 
-    this.image$ = combineLatest([
-      this.contrastSubject,
-      this.brighnessSubject,
-      this.imageLocalStorage.lastImages$,
-    ]).pipe(
-      map(([contrast, brightness, [left, right]]) => {
-        return toolDifference(left, right, contrast, brightness);
-      }),
-    );
+    this.image = computed(() => {
+      const left = this.left();
+      const right = this.right();
+      if (left == null || right == null) return undefined;
+      return toolDifference(left, right, this.contrast(), this.brightness());
+    });
   }
 
-  protected clear() {
+  protected clearLeft() {
     this.imageLocalStorage.clear("left");
+  }
+
+  protected clearRight() {
     this.imageLocalStorage.clear("right");
   }
 }
