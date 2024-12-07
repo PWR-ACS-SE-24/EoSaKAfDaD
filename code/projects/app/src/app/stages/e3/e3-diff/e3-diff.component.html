@@ -4,7 +4,10 @@
       [image]="left()"
       [showButtons]="false"
     ></app-image-display>
-    <button [ariaDisabled]="left() === undefined" (click)="clearLeft()">
+    <button
+      [ariaDisabled]="left() === undefined"
+      (click)="imageLocalStorage.clear('left')"
+    >
       Usuń
     </button>
   </section>
@@ -13,7 +16,10 @@
       [image]="right()"
       [showButtons]="false"
     ></app-image-display>
-    <button [ariaDisabled]="right() === undefined" (click)="clearRight()">
+    <button
+      [ariaDisabled]="right() === undefined"
+      (click)="imageLocalStorage.clear('right')"
+    >
       Usuń
     </button>
   </section>

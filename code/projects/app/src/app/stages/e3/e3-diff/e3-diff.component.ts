@@ -1,4 +1,4 @@
-import { Component, computed, signal, Signal } from "@angular/core";
+import { Component, computed, inject, signal } from "@angular/core";
 import { toolDifference } from "steg";
 import { ImageComparisonService } from "../../../shared/image-comparison/image-comparison.service";
 import { ImageDisplayComponent } from "../../../shared/image-display/image-display.component";
@@ -13,30 +13,18 @@ import { SliderComponent } from "../slider/slider.component";
   styleUrl: "./e3-diff.component.css",
 })
 export class E3DiffComponent {
+  protected readonly imageLocalStorage = inject(ImageComparisonService);
+
   protected readonly contrast = signal(0);
   protected readonly brightness = signal(0);
 
-  protected readonly image: Signal<ImageData | undefined>;
-  protected readonly left: Signal<ImageData | undefined>;
-  protected readonly right: Signal<ImageData | undefined>;
+  protected readonly left = this.imageLocalStorage.left;
+  protected readonly right = this.imageLocalStorage.right;
 
-  constructor(private readonly imageLocalStorage: ImageComparisonService) {
-    this.left = this.imageLocalStorage.left;
-    this.right = this.imageLocalStorage.right;
-
-    this.image = computed(() => {
-      const left = this.left();
-      const right = this.right();
-      if (left == null || right == null) return undefined;
-      return toolDifference(left, right, this.contrast(), this.brightness());
-    });
-  }
-
-  protected clearLeft() {
-    this.imageLocalStorage.clear("left");
-  }
-
-  protected clearRight() {
-    this.imageLocalStorage.clear("right");
-  }
+  protected readonly image = computed(() => {
+    const left = this.left();
+    const right = this.right();
+    if (left == null || right == null) return undefined;
+    return toolDifference(left, right, this.contrast(), this.brightness());
+  });
 }

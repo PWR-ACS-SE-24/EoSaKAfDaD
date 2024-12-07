@@ -3,15 +3,15 @@
   @if (showControls()) {
     <div class="buttons">
       <button
-        (@flash.done)="clearState('left')"
-        [@flash]="state['left']"
+        (@flash.done)="clearState($event, 'left')"
+        [@flash]="state['left']()"
         (click)="addImage('left')"
       >
         L
       </button>
       <button
-        (@flash.done)="clearState('right')"
-        [@flash]="state['right']"
+        (@flash.done)="clearState($event, 'right')"
+        [@flash]="state['right']()"
         (click)="addImage('right')"
       >
         P
