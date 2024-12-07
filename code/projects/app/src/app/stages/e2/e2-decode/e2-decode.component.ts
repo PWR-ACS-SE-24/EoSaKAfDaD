@@ -1,4 +1,4 @@
-import { Component, effect, resource, signal } from "@angular/core";
+import { Component, resource, signal } from "@angular/core";
 import { ImageDisplayComponent } from "../../../shared/image-display/image-display.component";
 import { ImageUploadComponent } from "../../../shared/image-upload/image-upload.component";
 import { computedOpt } from "../../../util/computed-opt";
@@ -45,16 +45,5 @@ export class E2DecodeComponent {
         .reduce((acc, bit) => acc * 2 + bit, 0);
     }
     return this.textDecoder.decode(characters);
-  }
-
-  public constructor() {
-    effect(() => {
-      console.log({
-        image: this.image(),
-        file: this.file(),
-        jpegDecoder: this.jpegDecoder(),
-        textContent: this.textContent(),
-      });
-    });
   }
 }

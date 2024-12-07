@@ -1,7 +1,8 @@
-import { Component, computed, resource, signal } from "@angular/core";
+import { Component, computed, signal } from "@angular/core";
 import { FileDownloadComponent } from "../../../shared/file-download/file-download.component";
 import { ImageDisplayComponent } from "../../../shared/image-display/image-display.component";
 import { ImageUploadComponent } from "../../../shared/image-upload/image-upload.component";
+import { asyncComputed } from "../../../util/async-computed";
 import { computedOpt } from "../../../util/computed-opt";
 import { debouncedSignal } from "../../../util/debounced-signal";
 import { fromFile } from "../../../util/image-data";
@@ -36,14 +37,14 @@ export class E2EncodeComponent {
       i,
     ),
   );
-  protected readonly newImage = resource({
-    request: this.newFile,
-    loader: async ({ request }) => {
-      if (!request) return undefined;
-      return fromFile(request);
+  protected readonly newImage = asyncComputed<ImageData | undefined>(
+    undefined,
+    async () => {
+      const file = this.newFile();
+      if (!file) return undefined;
+      return fromFile(file);
     },
-  }).value;
-
+  );
   // The problem with length of encoded text is that we can't know for sure how
   //   many characters we can encode in the image. The number of characters
   //   depends not only on the image size, but also on the image content,
