@@ -10,7 +10,7 @@ export class ImageComparisonService {
   public readonly right = signal<ImageData | undefined>(undefined);
 
   public readonly images = computed(() => {
-    return [this.left(), this.right()];
+    return [this.left(), this.right()] as const;
   });
 
   public addImage(which: Side, image: ImageData): boolean {
