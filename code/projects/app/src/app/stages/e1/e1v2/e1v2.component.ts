@@ -1,8 +1,8 @@
 import { Component, computed, signal } from "@angular/core";
-import { lsbHighlight, lsb2extractText, lsb2embedText } from "steg";
-import { ImageUploadComponent } from "../../../shared/image-upload/image-upload.component";
+import { lsb2embedText, lsb2extractText, lsbHighlight } from "steg";
 import { ImageDisplayComponent } from "../../../shared/image-display/image-display.component";
 import { ImageDownloadComponent } from "../../../shared/image-download/image-download.component";
+import { ImageUploadComponent } from "../../../shared/image-upload/image-upload.component";
 import { computedOpt } from "../../../util/computed-opt";
 import { debouncedSignal } from "../../../util/debounced-signal";
 
@@ -22,7 +22,7 @@ export class E1V2Component {
 
   protected readonly image = signal<ImageData | undefined>(undefined);
   protected readonly newImage = computedOpt(this.image, (i) =>
-    lsb2embedText(i, this.debouncedText())
+    lsb2embedText(i, this.debouncedText()),
   );
   protected readonly lsbImage = computedOpt(this.newImage, lsbHighlight);
 

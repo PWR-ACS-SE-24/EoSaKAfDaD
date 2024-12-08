@@ -1,1 +1,21 @@
-<canvas #canvas></canvas>
+<div class="wrapper">
+  <canvas #canvas></canvas>
+  @if (showControls()) {
+    <div class="buttons">
+      <button
+        (@flash.done)="clearState($event, 'left')"
+        [@flash]="state['left']()"
+        (click)="addImage('left')"
+      >
+        L
+      </button>
+      <button
+        (@flash.done)="clearState($event, 'right')"
+        [@flash]="state['right']()"
+        (click)="addImage('right')"
+      >
+        P
+      </button>
+    </div>
+  }
+</div>

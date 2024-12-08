@@ -1,0 +1,49 @@
+<div class="grid">
+  <section>
+    <app-image-display
+      [image]="left()"
+      [showButtons]="false"
+    ></app-image-display>
+    <button
+      [ariaDisabled]="left() === undefined"
+      (click)="imageLocalStorage.clear('left')"
+    >
+      Usuń
+    </button>
+  </section>
+  <section>
+    <app-image-display
+      [image]="right()"
+      [showButtons]="false"
+    ></app-image-display>
+    <button
+      [ariaDisabled]="right() === undefined"
+      (click)="imageLocalStorage.clear('right')"
+    >
+      Usuń
+    </button>
+  </section>
+  <section>
+    <app-slider
+      label="Kontrast"
+      [(value)]="contrast"
+      [min]="-200"
+      [max]="200"
+      [step]="1"
+    ></app-slider>
+    <app-slider
+      label="Jasność"
+      [(value)]="brightness"
+      [min]="-200"
+      [max]="200"
+      [step]="1"
+    ></app-slider>
+    <app-image-download [image]="image()"></app-image-download>
+  </section>
+  <section>
+    <app-image-display
+      [image]="image()"
+      [showButtons]="false"
+    ></app-image-display>
+  </section>
+</div>

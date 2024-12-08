@@ -7,7 +7,7 @@
 .grid {
   flex: 1;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   grid-template-rows: 1fr;
   grid-gap: 1rem;
 }
@@ -20,17 +20,13 @@ section {
   gap: 1rem;
 }
 
-.arrow {
-  font-size: 3rem;
-  font-weight: bold;
-}
-
-section > textarea {
-  width: 100%;
-  background: var(--app-white);
-  border: 1px solid var(--app-black);
-}
-
-section > textarea:disabled {
-  background: var(--app-silver);
+button {
+  display: inline-flex;
+  margin: 1rem;
+  padding: 0.25rem 1rem;
+  border: 2px solid var(--app-gray);
+  border-radius: 0.5rem;
+  position: relative;
+  cursor: default;
+  user-select: none;
 }

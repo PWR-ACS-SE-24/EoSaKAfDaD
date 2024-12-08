@@ -1,4 +1,8 @@
 {
   "rust-analyzer.linkedProjects": ["code/projects/steg/src/lib/Cargo.toml"],
-  "markdown-pdf.displayHeaderFooter": false
+  "markdown-pdf.displayHeaderFooter": false,
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+      "source.organizeImports": "always"
+  }
 }

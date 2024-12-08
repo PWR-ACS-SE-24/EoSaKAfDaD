@@ -4,7 +4,7 @@ import { debounceTime } from "rxjs";
 
 export function debouncedSignal<T>(
   source: Signal<T>,
-  dueTime: number
+  dueTime: number,
 ): Signal<T> {
   const initialValue = source();
   const source$ = toObservable(source);

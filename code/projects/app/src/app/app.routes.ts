@@ -3,7 +3,7 @@ import { Routes } from "@angular/router";
 export const stageRoutes: Routes = [
   {
     path: "e1",
-    title: "E1 (LSB v1)",
+    title: "E1 (LSB)",
     loadComponent: () =>
       import("./stages/e1/e1.component").then((m) => m.E1Component),
   },
@@ -15,7 +15,7 @@ export const stageRoutes: Routes = [
   },
   {
     path: "e3",
-    title: "E3 (edytor)",
+    title: "E3 (analiza)",
     loadComponent: () =>
       import("./stages/e3/e3.component").then((m) => m.E3Component),
   },
