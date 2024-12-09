@@ -24,16 +24,12 @@ export class E5EncodeComponent {
   protected readonly image = signal<ImageData | undefined>(undefined);
   protected readonly file = signal<File | undefined>(undefined);
 
-  // protected readonly newFile = computedOpt(this.file, (file) =>
-  //   this.encodeFile(file, this.debouncedKey(), this.debouncedText()),
-  // );
-
   protected readonly newFile = asyncComputed<File | undefined>(
     undefined,
     async () => {
       const file = this.file();
       if (!file) return undefined;
-      return await this.encodeFile(
+      return await this.pngMetaService.encode(
         file,
         this.debouncedKey(),
         this.debouncedText(),
@@ -58,9 +54,5 @@ export class E5EncodeComponent {
   protected onTextChange(event: Event): void {
     const text = (event.target as HTMLInputElement).value;
     this.textContent.set(text);
-  }
-
-  private async encodeFile(file: File, key: string, text: string) {
-    return await this.pngMetaService.encode(file, key, text);
   }
 }
