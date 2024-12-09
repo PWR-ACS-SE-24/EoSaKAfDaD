@@ -1,19 +1,22 @@
 <div class="grid">
   <section>
-    <app-image-display [image]="image()" />
+    <app-image-display [image]="image()" [showButtons]="false" />
     <app-image-upload
       (imageChange)="image.set($event)"
       (fileChange)="file.set($event)"
     ></app-image-upload>
   </section>
   <section>
+    Klucz:
     <textarea
       rows="1"
-      [disabled]="textKey() === 0"
+      [value]="keyContent()"
+      [disabled]="image() === undefined"
       (input)="onKeyChange($event)"
     ></textarea>
   </section>
   <section>
+    Wartość:
     <textarea rows="5" [value]="textContent()" [disabled]="true"></textarea>
   </section>
 </div>

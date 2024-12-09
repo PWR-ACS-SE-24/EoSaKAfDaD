@@ -7,13 +7,18 @@
     ></app-image-upload>
   </section>
   <section>
+    Klucz:
     <textarea
       rows="1"
+      [value]="keyContent()"
       [disabled]="image() === undefined"
       (input)="onKeyChange($event)"
     ></textarea>
+    <br />
+    Wartość:
     <textarea
       rows="5"
+      [value]="textContent()"
       [disabled]="image() === undefined"
       (input)="onTextChange($event)"
     ></textarea>
