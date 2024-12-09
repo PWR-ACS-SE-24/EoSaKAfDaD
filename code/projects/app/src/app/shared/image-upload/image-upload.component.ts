@@ -1,5 +1,7 @@
-import { Component, input, output } from "@angular/core";
+import { AnimationEvent } from "@angular/animations";
+import { Component, input, output, signal } from "@angular/core";
 import { fromFile } from "../../util/image-data";
+import { Flash, flashAnimation } from "../animations/flash";
 
 type Validator = {
   validate: (image: ImageData) => boolean;
@@ -10,11 +12,14 @@ type Validator = {
   selector: "app-image-upload",
   templateUrl: "./image-upload.component.html",
   styleUrl: "./image-upload.component.css",
+  animations: [flashAnimation("var(--app-white)")],
 })
 export class ImageUploadComponent {
   public readonly validators = input<Validator[]>([]);
   public readonly imageChange = output<ImageData>();
   public readonly fileChange = output<File>();
+
+  protected readonly flashState = signal<Flash>("default");
 
   protected readonly inputId = crypto.randomUUID();
   protected readonly supportedMimeTypes = [
@@ -24,8 +29,6 @@ export class ImageUploadComponent {
   ];
 
   protected isHovered = false;
-  protected flashClass: "red" | "green" | null = null;
-  private flashTimeout: number | null = null;
 
   protected cancelEvent(event: Event): void {
     event.preventDefault();
@@ -48,21 +51,21 @@ export class ImageUploadComponent {
     this.handleFile(event.dataTransfer?.files?.[0]);
   }
 
-  private flash(type: "red" | "green"): void {
-    if (this.flashTimeout) {
-      clearTimeout(this.flashTimeout);
-      this.flashTimeout = null;
-    }
-    this.flashClass = null;
-    requestAnimationFrame(() => (this.flashClass = type));
-    this.flashTimeout = window.setTimeout(() => (this.flashClass = null), 2000);
-  }
-
   protected onInputChange(event: Event): void {
     this.cancelEvent(event);
     const input = event.currentTarget;
     if (!(input instanceof HTMLInputElement)) return;
     this.handleFile(input.files?.[0]);
+  }
+
+  private flash(type: Flash): void {
+    this.flashState.set(type);
+  }
+
+  protected clearState(event: AnimationEvent): void {
+    if (event.fromState === "default") {
+      this.flashState.set("default");
+    }
   }
 
   private handleFile(file: File | null | undefined): void {

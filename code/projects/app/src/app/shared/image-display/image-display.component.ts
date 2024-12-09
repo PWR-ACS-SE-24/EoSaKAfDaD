@@ -1,11 +1,4 @@
-import {
-  animate,
-  AnimationEvent,
-  state,
-  style,
-  transition,
-  trigger,
-} from "@angular/animations";
+import { AnimationEvent } from "@angular/animations";
 import {
   Component,
   computed,
@@ -17,28 +10,17 @@ import {
   viewChild,
 } from "@angular/core";
 import { drawOn } from "../../util/image-data";
+import { Flash, flashAnimation } from "../animations/flash";
 import {
   ImageComparisonService,
   Side,
 } from "../image-comparison/image-comparison.service";
 
-type Flash = "red" | "green" | "default";
-
 @Component({
   selector: "app-image-display",
   templateUrl: "./image-display.component.html",
   styleUrl: "./image-display.component.css",
-  animations: [
-    trigger("flash", [
-      state("red", style({ backgroundColor: "var(--app-red)" })),
-      state("green", style({ backgroundColor: "var(--app-green)" })),
-      state("default", style({ backgroundColor: "var(--app-navy)" })),
-      transition("red => default", animate("300ms")),
-      transition("green => default", animate("300ms")),
-      transition("default => red", animate("0ms")),
-      transition("default => green", animate("0ms")),
-    ]),
-  ],
+  animations: [flashAnimation("var(--app-navy)")],
 })
 export class ImageDisplayComponent {
   private readonly imageLocalStorage = inject(ImageComparisonService);

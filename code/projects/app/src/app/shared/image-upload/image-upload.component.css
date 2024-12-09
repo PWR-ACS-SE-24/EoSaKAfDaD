@@ -20,29 +20,3 @@ label strong {
 .hovered {
   background-color: var(--app-silver);
 }
-
-@keyframes flashRed {
-  from {
-    background-color: var(--app-red);
-  }
-  to {
-    background-color: inherit;
-  }
-}
-
-.flashRed {
-  animation: flashRed 2s forwards;
-}
-
-@keyframes flashGreen {
-  from {
-    background-color: var(--app-green);
-  }
-  to {
-    background-color: inherit;
-  }
-}
-
-.flashGreen {
-  animation: flashGreen 2s forwards;
-}
