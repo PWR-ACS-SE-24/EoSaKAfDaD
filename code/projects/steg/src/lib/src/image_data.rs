@@ -16,6 +16,7 @@ pub trait ImageDataExt {
     fn map_bytes(&self, mut f: impl FnMut(u8) -> u8) -> ImageData {
         self.map_pixels(|(r, g, b)| (f(r), f(g), f(b)))
     }
+    fn difference(&self, other: &ImageData) -> ImageData;
 }
 
 impl ImageDataExt for ImageData {
@@ -30,6 +31,17 @@ impl ImageDataExt for ImageData {
         for i in (0..d.len()).step_by(RGBA_CHANNELS) {
             (d[i], d[i + 1], d[i + 2]) = f((d[i], d[i + 1], d[i + 2]));
             d[i + 3] = u8::MAX;
+        }
+        create_image_data(&d, self.width())
+    }
+
+    fn difference(&self, other: &ImageData) -> ImageData {
+        assert_eq!(self.width(), other.width());
+        assert_eq!(self.height(), other.height());
+        let mut d = self.data().0;
+        let o = other.data().0;
+        for i in 0..d.len() {
+            d[i] = d[i].abs_diff(o[i]);
         }
         create_image_data(&d, self.width())
     }

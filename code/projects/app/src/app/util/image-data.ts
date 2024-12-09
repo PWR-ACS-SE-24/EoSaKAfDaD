@@ -25,7 +25,7 @@ export function dataUrl(image: ImageData, type: string = "image/png"): string {
 
 export function drawOn(
   image: ImageData | undefined,
-  canvas: HTMLCanvasElement
+  canvas: HTMLCanvasElement,
 ): void {
   if (image) {
     canvas.width = image.width;

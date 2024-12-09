@@ -1,9 +1,9 @@
-import { Component, effect, resource, signal } from "@angular/core";
-import { JPEGDecoder } from "../helpers/jpeg-decode";
+import { Component, resource, signal } from "@angular/core";
 import { ImageDisplayComponent } from "../../../shared/image-display/image-display.component";
 import { ImageUploadComponent } from "../../../shared/image-upload/image-upload.component";
-import { SliderComponent } from "../../e3/slider/slider.component";
 import { computedOpt } from "../../../util/computed-opt";
+import { SliderComponent } from "../../e3/slider/slider.component";
+import { JPEGDecoder } from "../helpers/jpeg-decode";
 
 @Component({
   selector: "app-e2-decode",
@@ -26,7 +26,7 @@ export class E2DecodeComponent {
     },
   }).value;
   protected readonly textContent = computedOpt(this.jpegDecoder, (d) =>
-    this.decodeTextFromDCT(d, this.dataDensity())
+    this.decodeTextFromDCT(d, this.dataDensity()),
   );
 
   private decodeImage(file: ArrayBuffer) {
@@ -45,16 +45,5 @@ export class E2DecodeComponent {
         .reduce((acc, bit) => acc * 2 + bit, 0);
     }
     return this.textDecoder.decode(characters);
-  }
-
-  public constructor() {
-    effect(() => {
-      console.log({
-        image: this.image(),
-        file: this.file(),
-        jpegDecoder: this.jpegDecoder(),
-        textContent: this.textContent(),
-      });
-    });
   }
 }

@@ -45,3 +45,8 @@ pub fn tool_contrast(image: &ImageData, change: i32) -> ImageData {
     let factor = (259. * (change as f64 + 255.)) / (255. * (259. - change as f64));
     image.map_bytes(|v| (factor * (v as f64 - 128.) + 128.) as u8)
 }
+
+#[wasm_bindgen(js_name = toolDifference)]
+pub fn tool_difference(image_left: &ImageData, image_right: &ImageData, contrast: i32, brightness: i32) -> ImageData {
+    tool_contrast(&tool_brightness(&image_left.difference(image_right), contrast), brightness)
+}

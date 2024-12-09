@@ -1,6 +1,6 @@
 <ul>
   @for (tab of tabs; track tab.name) {
-  <li (click)="selectTab(tab)" [class.active]="tab.active">{{ tab.name }}</li>
+    <li (click)="selectTab(tab)" [class.active]="tab.active">{{ tab.name }}</li>
   }
 </ul>
 <ng-content></ng-content>

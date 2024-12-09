@@ -1,18 +1,18 @@
 @if (data(); as d) {
-<div class="wrapper">
-  Pobierz
-  <ul>
-    <li>
-      <a [href]="d.pathPng" [download]="d.fileHash + '.png'">.png</a>
-    </li>
-    <li>
-      <a [href]="d.pathJpeg" [download]="d.fileHash + '.jpg'">.jpg</a>
-    </li>
-    <li>
-      <a [href]="d.pathWebp" [download]="d.fileHash + '.webp'">.webp</a>
-    </li>
-  </ul>
-</div>
+  <div class="wrapper">
+    Pobierz
+    <ul>
+      <li>
+        <a [href]="d.pathPng" [download]="d.fileHash + '.png'">.png</a>
+      </li>
+      <li>
+        <a [href]="d.pathJpeg" [download]="d.fileHash + '.jpg'">.jpg</a>
+      </li>
+      <li>
+        <a [href]="d.pathWebp" [download]="d.fileHash + '.webp'">.webp</a>
+      </li>
+    </ul>
+  </div>
 } @else {
-<div class="wrapper" aria-disabled>Pobierz</div>
+  <div class="wrapper" aria-disabled>Pobierz</div>
 }

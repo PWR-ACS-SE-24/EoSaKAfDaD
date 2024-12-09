@@ -1,7 +1,7 @@
 @if (download(); as d) {
-<div class="wrapper">
-  <a [href]="d.path" [download]="d.fileName">Pobierz</a>
-</div>
+  <div class="wrapper">
+    <a [href]="d.path" [download]="d.fileName">Pobierz</a>
+  </div>
 } @else {
-<div class="wrapper" aria-disabled>Pobierz</div>
+  <div class="wrapper" aria-disabled>Pobierz</div>
 }

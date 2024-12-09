@@ -24,13 +24,3 @@ section {
   font-size: 3rem;
   font-weight: bold;
 }
-
-section > textarea {
-  width: 100%;
-  background: var(--app-white);
-  border: 1px solid var(--app-black);
-}
-
-section > textarea:disabled {
-  background: var(--app-silver);
-}

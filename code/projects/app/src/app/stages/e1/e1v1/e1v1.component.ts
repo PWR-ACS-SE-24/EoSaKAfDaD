@@ -1,8 +1,8 @@
 import { Component, computed, signal } from "@angular/core";
-import { lsbHighlight, lsb1embedText, lsb1extractText } from "steg";
-import { ImageUploadComponent } from "../../../shared/image-upload/image-upload.component";
+import { lsb1embedText, lsb1extractText, lsbHighlight } from "steg";
 import { ImageDisplayComponent } from "../../../shared/image-display/image-display.component";
 import { ImageDownloadComponent } from "../../../shared/image-download/image-download.component";
+import { ImageUploadComponent } from "../../../shared/image-upload/image-upload.component";
 import { computedOpt } from "../../../util/computed-opt";
 import { debouncedSignal } from "../../../util/debounced-signal";
 
@@ -25,14 +25,14 @@ export class E1V1Component {
 
   protected readonly image = signal<ImageData | undefined>(undefined);
   protected readonly newImage = computedOpt(this.image, (i) =>
-    lsb1embedText(i, this.debouncedText())
+    lsb1embedText(i, this.debouncedText()),
   );
   protected readonly lsbImage = computedOpt(this.newImage, lsbHighlight);
   protected readonly textBound = computed(() => {
     const image = this.image();
     return image
       ? Math.floor(
-          (image.width * image.height * RGB_CHANNELS) / ASCII_CHAR_BITS
+          (image.width * image.height * RGB_CHANNELS) / ASCII_CHAR_BITS,
         )
       : 0;
   });
@@ -45,7 +45,7 @@ export class E1V1Component {
   protected onTextChange(event: Event): void {
     const target = event.currentTarget as HTMLTextAreaElement;
     this.textContent.set(
-      target.value.replace(/[^\x00-\x7F]/g, "").slice(0, this.textBound())
+      target.value.replace(/[^\x00-\x7F]/g, "").slice(0, this.textBound()),
     );
     target.value = this.textContent();
   }
