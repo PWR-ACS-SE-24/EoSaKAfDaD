@@ -3,6 +3,10 @@
   "markdown-pdf.displayHeaderFooter": false,
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
-      "source.organizeImports": "always"
+    "source.organizeImports": "always"
+  },
+  "editor.tabSize": 2,
+  "[rust]": {
+    "editor.tabSize": 4
   }
 }
