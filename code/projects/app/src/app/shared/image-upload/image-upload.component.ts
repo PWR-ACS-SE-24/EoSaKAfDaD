@@ -58,10 +58,6 @@ export class ImageUploadComponent {
     this.handleFile(input.files?.[0]);
   }
 
-  private flash(type: Flash): void {
-    this.flashState.set(type);
-  }
-
   protected clearState(event: AnimationEvent): void {
     if (event.fromState === "default") {
       this.flashState.set("default");
@@ -71,7 +67,7 @@ export class ImageUploadComponent {
   private handleFile(file: File | null | undefined): void {
     requestAnimationFrame(() => {
       if (!file || !this.supportedMimeTypes.includes(file.type)) {
-        this.flash("red");
+        this.flashState.set("red");
         alert("Niewspierany format pliku!");
         return;
       }
@@ -79,7 +75,7 @@ export class ImageUploadComponent {
       fromFile(file).then((image) => {
         for (const validator of this.validators()) {
           if (!validator.validate(image)) {
-            this.flash("red");
+            this.flashState.set("red");
             alert(validator.message);
             return;
           }
@@ -87,7 +83,7 @@ export class ImageUploadComponent {
 
         this.imageChange.emit(image);
         this.fileChange.emit(file);
-        this.flash("green");
+        this.flashState.set("green");
       });
     });
   }
