@@ -1,7 +1,11 @@
 import { Component, computed, signal } from "@angular/core";
 import { FormsModule } from "@angular/forms";
-import { vcIsMonochrome, vcMakeMask } from "steg";
+import { vcMakeMask } from "steg";
 import { ImageDisplayComponent } from "../../../shared/image-display/image-display.component";
+import {
+  mimeValidator,
+  monochromeValidator,
+} from "../../../shared/image-upload/image-upload-validators";
 import { ImageUploadComponent } from "../../../shared/image-upload/image-upload.component";
 
 @Component({
@@ -24,10 +28,5 @@ export class E4MergeComponent {
     return image ? vcMakeMask(image) : undefined;
   });
 
-  protected readonly uploadValidators = [
-    {
-      validate: vcIsMonochrome,
-      message: "Obraz musi być monochromatyczny!",
-    },
-  ];
+  protected readonly uploadValidators = [mimeValidator(), monochromeValidator];
 }
