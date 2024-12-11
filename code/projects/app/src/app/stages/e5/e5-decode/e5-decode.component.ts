@@ -1,4 +1,4 @@
-import { Component, signal } from "@angular/core";
+import { Component, inject, signal } from "@angular/core";
 import { ImageDisplayComponent } from "../../../shared/image-display/image-display.component";
 import { ImageUploadComponent } from "../../../shared/image-upload/image-upload.component";
 import { asyncComputed } from "../../../util/async-computed";
@@ -12,7 +12,7 @@ import { PngMetaService } from "../e5-services/png-meta.service";
   styleUrl: "./e5-decode.component.css",
 })
 export class E5DecodeComponent {
-  constructor(private readonly pngMetaService: PngMetaService) {}
+  private readonly pngMetaService = inject(PngMetaService);
 
   protected readonly keyContent = signal("");
   private readonly debouncedKey = debouncedSignal(this.keyContent, 300);
@@ -25,7 +25,7 @@ export class E5DecodeComponent {
     this.keyContent.set(key);
   }
 
-  protected readonly textContent = asyncComputed<string>("", async () => {
+  protected readonly textContent = asyncComputed("", async () => {
     const file = this.file();
     if (!file) return "";
     return (await this.pngMetaService.decode(file, this.debouncedKey())) ?? "";

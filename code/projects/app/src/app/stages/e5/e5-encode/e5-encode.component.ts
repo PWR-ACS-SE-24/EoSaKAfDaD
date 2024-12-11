@@ -1,4 +1,4 @@
-import { Component, signal } from "@angular/core";
+import { Component, inject, signal } from "@angular/core";
 import { FileDownloadComponent } from "../../../shared/file-download/file-download.component";
 import { ImageDisplayComponent } from "../../../shared/image-display/image-display.component";
 import { ImageUploadComponent } from "../../../shared/image-upload/image-upload.component";
@@ -14,7 +14,7 @@ import { PngMetaService } from "../e5-services/png-meta.service";
   styleUrl: "./e5-encode.component.css",
 })
 export class E5EncodeComponent {
-  constructor(private readonly pngMetaService: PngMetaService) {}
+  private readonly pngMetaService = inject(PngMetaService);
 
   protected readonly keyContent = signal("");
   protected readonly textContent = signal("");
@@ -24,27 +24,21 @@ export class E5EncodeComponent {
   protected readonly image = signal<ImageData | undefined>(undefined);
   protected readonly file = signal<File | undefined>(undefined);
 
-  protected readonly newFile = asyncComputed<File | undefined>(
-    undefined,
-    async () => {
-      const file = this.file();
-      if (!file) return undefined;
-      return await this.pngMetaService.encode(
-        file,
-        this.debouncedKey(),
-        this.debouncedText(),
-      );
-    },
-  );
+  protected readonly newFile = asyncComputed(undefined, async () => {
+    const file = this.file();
+    if (!file) return undefined;
+    return this.pngMetaService.encode(
+      file,
+      this.debouncedKey(),
+      this.debouncedText(),
+    );
+  });
 
-  protected readonly newImage = asyncComputed<ImageData | undefined>(
-    undefined,
-    async () => {
-      const file = this.newFile();
-      if (!file) return undefined;
-      return fromFile(file);
-    },
-  );
+  protected readonly newImage = asyncComputed(undefined, async () => {
+    const file = this.newFile();
+    if (!file) return undefined;
+    return fromFile(file);
+  });
 
   protected onKeyChange(event: Event): void {
     const key = (event.target as HTMLInputElement).value;

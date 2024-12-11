@@ -16,8 +16,8 @@ export class PngMetaService {
   private readonly PNG_HEADER_LENGTH = 8;
 
   private createKey = (key: string) => `${this.KEY_PREFIX}${key}`;
-
-  constructor() {}
+  private bufferFromFile = async (file: File) =>
+    Buffer.from(await file.arrayBuffer());
 
   public async encode(
     inputPng: File,
@@ -25,9 +25,7 @@ export class PngMetaService {
     text: string,
   ): Promise<File> {
     const keyWithPrefix = this.createKey(key);
-    const inputBuffer = await inputPng.arrayBuffer().then((arrayBuffer) => {
-      return Buffer.from(arrayBuffer);
-    });
+    const inputBuffer = await this.bufferFromFile(inputPng);
 
     const chunkData = Buffer.from(`${keyWithPrefix}\0${text}`);
 
@@ -55,9 +53,7 @@ export class PngMetaService {
     key: string,
   ): Promise<string | undefined> {
     const keyWithPrefix = this.createKey(key);
-    const inputBuffer = await inputPng.arrayBuffer().then((arrayBuffer) => {
-      return Buffer.from(arrayBuffer);
-    });
+    const inputBuffer = await this.bufferFromFile(inputPng);
 
     let offset = this.PNG_HEADER_LENGTH;
     while (offset < inputBuffer.length) {
