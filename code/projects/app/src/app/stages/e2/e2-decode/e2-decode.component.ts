@@ -1,5 +1,6 @@
 import { Component, resource, signal } from "@angular/core";
 import { ImageDisplayComponent } from "../../../shared/image-display/image-display.component";
+import { mimeValidator } from "../../../shared/image-upload/image-upload-validators";
 import { ImageUploadComponent } from "../../../shared/image-upload/image-upload.component";
 import { computedOpt } from "../../../util/computed-opt";
 import { SliderComponent } from "../../e3/slider/slider.component";
@@ -28,6 +29,8 @@ export class E2DecodeComponent {
   protected readonly textContent = computedOpt(this.jpegDecoder, (d) =>
     this.decodeTextFromDCT(d, this.dataDensity()),
   );
+
+  protected readonly uploadValidators = [mimeValidator(["image/jpeg"])];
 
   private decodeImage(file: ArrayBuffer) {
     const rawImage = new Uint8ClampedArray(file);

@@ -2,11 +2,7 @@ import { AnimationEvent } from "@angular/animations";
 import { Component, input, output, signal } from "@angular/core";
 import { fromFile } from "../../util/image-data";
 import { Flash, flashAnimation } from "../animations/flash";
-
-type Validator = {
-  validate: (image: ImageData) => boolean;
-  message: string;
-};
+import { mimeValidator, Validator } from "./image-upload-validators";
 
 @Component({
   selector: "app-image-upload",
@@ -15,18 +11,13 @@ type Validator = {
   animations: [flashAnimation("var(--app-white)")],
 })
 export class ImageUploadComponent {
-  public readonly validators = input<Validator[]>([]);
+  public readonly validators = input<Validator[]>([mimeValidator()]);
   public readonly imageChange = output<ImageData>();
   public readonly fileChange = output<File>();
 
   protected readonly flashState = signal<Flash>("default");
 
   protected readonly inputId = crypto.randomUUID();
-  protected readonly supportedMimeTypes = [
-    "image/jpeg",
-    "image/png",
-    "image/webp",
-  ];
 
   protected isHovered = false;
 
@@ -65,26 +56,22 @@ export class ImageUploadComponent {
   }
 
   private handleFile(file: File | null | undefined): void {
-    requestAnimationFrame(() => {
-      if (!file || !this.supportedMimeTypes.includes(file.type)) {
-        this.flashState.set("red");
-        alert("Niewspierany format pliku!");
-        return;
+    if (!file) return;
+    const mime = file.type;
+
+    fromFile(file).then((image) => {
+      for (const validator of this.validators()) {
+        const error = validator({ image, file, mime });
+        if (error) {
+          this.flashState.set("red");
+          alert(error);
+          return;
+        }
       }
 
-      fromFile(file).then((image) => {
-        for (const validator of this.validators()) {
-          if (!validator.validate(image)) {
-            this.flashState.set("red");
-            alert(validator.message);
-            return;
-          }
-        }
-
-        this.imageChange.emit(image);
-        this.fileChange.emit(file);
-        this.flashState.set("green");
-      });
+      this.flashState.set("green");
+      this.imageChange.emit(image);
+      this.fileChange.emit(file);
     });
   }
 }
