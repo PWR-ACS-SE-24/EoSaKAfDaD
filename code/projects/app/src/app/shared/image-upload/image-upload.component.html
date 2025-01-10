@@ -11,7 +11,7 @@
     [id]="inputId"
     [name]="inputId"
     type="file"
-    [accept]="supportedMimeTypes.join(',')"
+    accept="image/*"
     (change)="onInputChange($event)"
   />
   <label [for]="inputId">

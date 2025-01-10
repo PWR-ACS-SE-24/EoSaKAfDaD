@@ -131,7 +131,7 @@ pub fn vc_make_monochrome(
 pub fn vc_is_monochrome(image: &ImageData) -> bool {
     let data = image.data().0;
     for p in data.chunks_exact(RGBA_CHANNELS) {
-        if p[0] != p[1] || p[1] != p[2] || (p[0] != u8::MIN && p[0] != u8::MAX) || p[3] != u8::MAX {
+        if !matches!(p, [0, 0, 0, 255] | [255, 255, 255, 255]) {
             return false;
         }
     }

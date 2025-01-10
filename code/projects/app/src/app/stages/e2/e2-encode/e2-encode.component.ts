@@ -1,6 +1,7 @@
 import { Component, computed, signal } from "@angular/core";
 import { FileDownloadComponent } from "../../../shared/file-download/file-download.component";
 import { ImageDisplayComponent } from "../../../shared/image-display/image-display.component";
+import { mimeValidator } from "../../../shared/image-upload/image-upload-validators";
 import { ImageUploadComponent } from "../../../shared/image-upload/image-upload.component";
 import { asyncComputed } from "../../../util/async-computed";
 import { computedOpt } from "../../../util/computed-opt";
@@ -58,6 +59,8 @@ export class E2EncodeComponent {
       ? Math.floor((image.width * image.height) / 64) * 2 * this.dataDensity()
       : 0;
   });
+
+  protected readonly uploadValidators = [mimeValidator(["image/jpeg"])];
 
   private encodeFile(
     text: string,

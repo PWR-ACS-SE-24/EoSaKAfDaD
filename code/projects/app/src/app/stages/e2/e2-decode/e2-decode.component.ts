@@ -1,5 +1,6 @@
 import { Component, computed, resource, signal } from "@angular/core";
 import { ImageDisplayComponent } from "../../../shared/image-display/image-display.component";
+import { mimeValidator } from "../../../shared/image-upload/image-upload-validators";
 import { ImageUploadComponent } from "../../../shared/image-upload/image-upload.component";
 import { SliderComponent } from "../../e3/slider/slider.component";
 import { JPEGDecoder } from "../helpers/jpeg-decode";
@@ -30,6 +31,8 @@ export class E2DecodeComponent {
     if (!decoder) return "";
     return this.decodeTextFromDCT(decoder, this.dataDensity());
   });
+
+  protected readonly uploadValidators = [mimeValidator(["image/jpeg"])];
 
   private decodeImage(file: ArrayBuffer) {
     const rawImage = new Uint8ClampedArray(file);

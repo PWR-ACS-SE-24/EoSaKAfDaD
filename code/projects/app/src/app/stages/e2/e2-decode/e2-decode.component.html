@@ -4,6 +4,7 @@
     <app-image-upload
       (imageChange)="image.set($event)"
       (fileChange)="file.set($event)"
+      [validators]="uploadValidators"
     ></app-image-upload>
   </section>
   <section>

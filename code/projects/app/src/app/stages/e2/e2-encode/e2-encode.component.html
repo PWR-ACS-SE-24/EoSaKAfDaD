@@ -1,7 +1,10 @@
 <div class="grid">
   <section>
     <app-image-display [image]="image()" />
-    <app-image-upload (imageChange)="this.image.set($event)"></app-image-upload>
+    <app-image-upload
+      (imageChange)="this.image.set($event)"
+      [validators]="uploadValidators"
+    ></app-image-upload>
   </section>
   <section>
     <app-slider
