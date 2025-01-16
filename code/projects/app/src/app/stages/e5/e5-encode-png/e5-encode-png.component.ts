@@ -8,12 +8,12 @@ import { fromFile } from "../../../util/image-data";
 import { PngMetaService } from "../e5-services/png-meta.service";
 
 @Component({
-  selector: "app-e5-encode",
+  selector: "app-e5-encode-png",
   imports: [ImageDisplayComponent, ImageUploadComponent, FileDownloadComponent],
-  templateUrl: "./e5-encode.component.html",
-  styleUrl: "./e5-encode.component.css",
+  templateUrl: "./e5-encode-png.component.html",
+  styleUrl: "./e5-encode-png.component.css",
 })
-export class E5EncodeComponent {
+export class E5EncodePngComponent {
   private readonly pngMetaService = inject(PngMetaService);
 
   protected readonly keyContent = signal("");

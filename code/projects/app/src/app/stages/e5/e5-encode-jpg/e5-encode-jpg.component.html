@@ -1,0 +1,30 @@
+<div class="grid">
+  <section>
+    <app-image-display [image]="image()" [showButtons]="false" />
+    <app-image-upload
+      (imageChange)="this.image.set($event)"
+      (fileChange)="file.set($event)"
+    ></app-image-upload>
+  </section>
+  <section>
+    <!-- Klucz:
+    <textarea
+      rows="1"
+      [value]="keyContent()"
+      [disabled]="image() === undefined"
+      (input)="onKeyChange($event)"
+    ></textarea>
+    <br /> -->
+    Tekst do zakodowania:
+    <textarea
+      rows="5"
+      [value]="textContent()"
+      [disabled]="image() === undefined"
+      (input)="onTextChange($event)"
+    ></textarea>
+  </section>
+  <section>
+    <app-image-display [image]="newImage()" [showButtons]="false" />
+    <app-file-download [file]="newFile()" />
+  </section>
+</div>
