@@ -78,7 +78,8 @@ _Na następny etap zaplanowano skończenie ukrywania w metadanych oraz rozpoczę
 
 ## Sprint 9 (10 stycznia - 16 stycznia)
 
-TODO @jakubzehner
+Zakończono **ukrywanie w metadanych** dla obrazów JPG. _(J. Zehner)_
+Zakończono przygotowywanie projektu do oddania.
 
 ## Podsumowanie
 
