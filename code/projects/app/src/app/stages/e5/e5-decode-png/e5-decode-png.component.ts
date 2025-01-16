@@ -6,12 +6,12 @@ import { debouncedSignal } from "../../../util/debounced-signal";
 import { PngMetaService } from "../e5-services/png-meta.service";
 
 @Component({
-  selector: "app-e5-decode",
+  selector: "app-e5-decode-png",
   imports: [ImageDisplayComponent, ImageUploadComponent],
-  templateUrl: "./e5-decode.component.html",
-  styleUrl: "./e5-decode.component.css",
+  templateUrl: "./e5-decode-png.component.html",
+  styleUrl: "./e5-decode-png.component.css",
 })
-export class E5DecodeComponent {
+export class E5DecodePngComponent {
   private readonly pngMetaService = inject(PngMetaService);
 
   protected readonly keyContent = signal("");
